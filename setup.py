@@ -32,7 +32,7 @@ def long_description():
 setup(name="bimage",
       version=__version__,
       license="BSD3",
-      packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
+      packages=find_packages(exclude=["*.test", "*.test.*", "test.*", "test"]),
       author="Chris Calloway",
       author_email="cbc@chriscalloway.org",
       description="Model package for building container images",
@@ -46,7 +46,7 @@ setup(name="bimage",
                    "Topic :: Software Development :: Build Tools",
                    ],
       zip_safe=False,
-      test_suite="bimage.tests",
+      test_suite="bimage.test",
       scripts=[
             'bimage/cloneRepo.py'
               ]

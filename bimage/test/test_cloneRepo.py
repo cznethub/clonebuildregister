@@ -13,7 +13,7 @@ import os
 import shutil
 
 
-class TestBimage(unittest.TestCase):
+class TestCloneRepo(unittest.TestCase):
     """Test functions in the bimage module."""
 
     def setUp(self):
@@ -26,7 +26,7 @@ class TestBimage(unittest.TestCase):
         
         shutil.rmtree("timage")
 
-    def test_bimage(self):
+    def test_clonerepo(self):
         """Test bimage.bimage."""
-
+        
         self.assertTrue(os.path.exists("timage"))
