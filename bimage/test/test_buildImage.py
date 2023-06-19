@@ -29,19 +29,24 @@ class TestBuildImage(unittest.TestCase):
         f.write("EXPOSE 80\n")
         f.write("CMD [\"python\", \"-m\",  \"http.server\", \"80\"]\n")
         f.close()
-        f = open("index.html", 'a')
-        f.write("<h1/>This is an h1 tag<h1>")
-        f.close()
+        #f = open("index.html", 'a')
+        #f.write("<h1/>This is an h1 tag<h1>")
+        #.close()
 
     def tearDown(self):
         """Test fixture destroy."""
         os.remove("Dockerfile")
-        os.remove("index.html")
+        #os.remove("index.html")
+
         
         
 
     def test_bimage(self):
         """Test bimage.bimage."""
-        buildImage.buildImage("testimage", "")
+        image = buildImage.buildImage("testimage", "")
+        
         client = docker.from_env()
+
         self.assertTrue(len(client.images.list(name="testimage")) > 0)
+        client.images.remove(image[0].short_id)
+        client.images.remove("continuumio/miniconda3")

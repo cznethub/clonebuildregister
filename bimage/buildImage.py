@@ -15,13 +15,15 @@ def buildImage(name, target):
             name              The name of the image we are trying to build
             target            The path that contains the dockerfile we want to build, "." for current directory
 
-        Returns: None
+        Returns: image, the image that was built.
     """
     
     client = docker.from_env()
     if (not os.path.exists(target) and not target == ""):
         os.makedirs(target)
-    client.images.build(
+    image = client.images.build(
+        rm=True,
         path="./{}/".format(target),
         tag={"{}".format(name)}
     )
+    return image
