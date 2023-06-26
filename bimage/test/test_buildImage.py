@@ -37,16 +37,21 @@ class TestBuildImage(unittest.TestCase):
         """Test fixture destroy."""
         os.remove("Dockerfile")
         #os.remove("index.html")
+        client = docker.from_env()
 
+        client.images.remove("continuumio/miniconda3:latest")
+        client.images.remove("testimage:v1")
+        # client.images.remove(image[0].short_id)
+        # client.images.remove("continuumio/miniconda3")
         
         
 
     def test_bimage(self):
         """Test bimage.bimage."""
-        image = buildImage.buildImage("testimage", "")
+        
+        image = buildImage.buildImage("testimage:v1", "")
         
         client = docker.from_env()
 
         self.assertTrue(len(client.images.list(name="testimage")) > 0)
-        client.images.remove(image[0].short_id)
-        client.images.remove("continuumio/miniconda3")
+        
