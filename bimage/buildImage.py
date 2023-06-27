@@ -7,7 +7,7 @@ This module builds an image via dockerpy
 import docker
 import os
 
-def buildImage(name, target):
+def buildImage(name: str, target: str):
     """
         The build image function.
 
@@ -19,8 +19,7 @@ def buildImage(name, target):
     """
     
     client = docker.from_env()
-    if (not os.path.exists(target) and not target == ""):
-        os.makedirs(target)
+    
     image = client.images.build(
         rm=True,
         path="./{}/".format(target),
