@@ -1,6 +1,13 @@
 # bimage
-Building an image in Python using docker and github3 packages
+Clones a repository, builds a docker image from that repository, and then pushes that image to google cloud artifact registry
+===
+To use bimage as a package:
 
+    >>> from bimage import bimage
+    >>> bimage.bimage("cbcunc" "timage" "develop" "testimage" "v1" "timage" "testimage" "v1" "us-east1" "bimage-project" "bimage-repository")
+    >>>
+
+To use bimage as a script:
 
 usage: bimage [-h]
               github_org repo_name branch_or_tag local_image_name local_image_tag path_to_dockerfile target_image_name
@@ -9,6 +16,7 @@ usage: bimage [-h]
 Build a container image described in a GitHub repository and push that image to google cloud artifact registry.
 
 positional arguments:
+  ==================  ===================================================================================================
   github_org          The GitHub organization of the repository
   repo_name           The name of the repository in the organization
   branch_or_tag       The branch or tag of the repository
@@ -21,6 +29,9 @@ positional arguments:
   region              Region the image will be stored in the google cloud (e.g. us-east1, us, eu)
   gcloudProjectId     The project id from which the image will be stored under in a google artifact registry
   repositoryName      The name of the google cloud artifact registry that holds docker images
-
+  ==================  ===================================================================================================
 options:
   -h, --help          show this help message and exit
+
+example:
+    $ python bimage cbcunc timage develop testimage v1 timage testimage v1 us-east1 bimage-project bimage-repository
