@@ -1,6 +1,10 @@
-# bimage
+
+******
+bimage
+******
+
 Clones a repository, builds a docker image from that repository, and then pushes that image to google cloud artifact registry
-===
+
 To use bimage as a package:
 
     >>> from bimage import bimage
@@ -9,29 +13,45 @@ To use bimage as a package:
 
 To use bimage as a script:
 
-usage: bimage [-h]
-              github_org repo_name branch_or_tag local_image_name local_image_tag path_to_dockerfile target_image_name
-              target_image_tag region gcloudProjectId repositoryName
+    usage: bimage [-h] \
+                  github_org repo_name branch_or_tag local_image_name local_image_tag path_to_dockerfile target_image_name \
+                  target_image_tag region gcloudProjectId repositoryName
+    
+    Build a container image described in a GitHub repository and push that image to google cloud artifact registry.
+    
+    positional arguments:
+      ==================  ===================================================================================================
+      github_org          The GitHub organization of the repository
+      repo_name           The name of the repository in the organization
+      branch_or_tag       The branch or tag of the repository
+      local_image_name    The name of the image we create locally from the Dockerfile
+      local_image_tag     The tag of the image we create locally from the Dockerfile (v1, 1.0.1, version2.0)
+      path_to_dockerfile  The path to the docker file from the repository we cloned, usually the name of the repository
+      target_image_name   The target image name, i.e. the name of the image we store in the google cloud artifact registry
+      target_image_tag    The target image tag, i.e. the tag of the image we store in the google cloud artifact registry (v1,
+                          1.0.1, version2.0)
+      region              Region the image will be stored in the google cloud (e.g. us-east1, us, eu)
+      gcloudProjectId     The project id from which the image will be stored under in a google artifact registry
+      repositoryName      The name of the google cloud artifact registry that holds docker images
+      ==================  ===================================================================================================
+    options:
+      -h, --help          show this help message and exit
+    
+    example:
+        $ python bimage cbcunc timage develop testimage v1 timage testimage v1 us-east1 bimage-project bimage-repository
 
-Build a container image described in a GitHub repository and push that image to google cloud artifact registry.
-
-positional arguments:
-  ==================  ===================================================================================================
-  github_org          The GitHub organization of the repository
-  repo_name           The name of the repository in the organization
-  branch_or_tag       The branch or tag of the repository
-  local_image_name    The name of the image we create locally from the Dockerfile
-  local_image_tag     The tag of the image we create locally from the Dockerfile (v1, 1.0.1, version2.0)
-  path_to_dockerfile  The path to the docker file from the repository we cloned, usually the name of the repository
-  target_image_name   The target image name, i.e. the name of the image we store in the google cloud artifact registry
-  target_image_tag    The target image tag, i.e. the tag of the image we store in the google cloud artifact registry (v1,
-                      1.0.1, version2.0)
-  region              Region the image will be stored in the google cloud (e.g. us-east1, us, eu)
-  gcloudProjectId     The project id from which the image will be stored under in a google artifact registry
-  repositoryName      The name of the google cloud artifact registry that holds docker images
-  ==================  ===================================================================================================
-options:
-  -h, --help          show this help message and exit
-
-example:
-    $ python bimage cbcunc timage develop testimage v1 timage testimage v1 us-east1 bimage-project bimage-repository
+Use modules of bimage
+*********************
+Use the module buildImage:
+    >>> from bimage import buildImage
+    >>> image = buildImage.buildImage("testimage:v1","") # if Dockerfile in current directory, use 2nd argument as target directory
+    >>>
+Use the module cloneRepo:
+    >>> from bimage import cloneRepo
+    >>> cloneRepo.cloneRepo("cbcunc", "timage", "develop") # github_org, repo_name, branch_or_tag
+    >>>
+Use the module registerImage:
+    >>> # don't forget to authenticate to gcloud within your shell before trying this command
+    >>> from bimage import registerImage
+    >>> response = registerImage.registerImage("testimage", "v2", "test-image-out", "v1", "us-east1", "bimage-project", "bimage-repository")
+    >>> 
