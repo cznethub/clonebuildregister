@@ -19,7 +19,7 @@ def buildImage(name: str, target: str):
     """
     
     client = docker.from_env()
-    
+    # print(os.getcwd())
     image = client.images.build(
         rm=True,
         path="./{}/".format(target),

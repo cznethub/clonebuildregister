@@ -21,17 +21,11 @@ class TestRegisterImage(unittest.TestCase):
         """ Tests set up """
         #os.chdir("bimage/test")
         #print(os.getcwd())
-        f = open("Dockerfile", 'a')
-        f.write("FROM continuumio/miniconda3:latest\n")
-        f.write("WORKDIR /\n")
-        f.write("COPY . .\n")
-        f.write("EXPOSE 80\n")
-        f.write("CMD [\"python\", \"-m\",  \"http.server\", \"80\"]\n")
-        f.close()
+        
         buildImage.buildImage("testimage:v2", "")
     def tearDown(self):
         """Test fixture destroy."""
-        os.remove("Dockerfile")
+        
         client = docker.from_env()
         client.images.remove("continuumio/miniconda3:latest")
 
