@@ -50,6 +50,10 @@ Use the module cloneRepo:
     >>> from bimage import cloneRepo
     >>> cloneRepo.cloneRepo("cbcunc", "timage", "develop") # github_org, repo_name, branch_or_tag
     >>>
+Use the module cloneRepo with environment variable copy:
+    >>> from bimage import cloneRepo
+    >>> cloneRepo.cloneRepo("cbcunc", "timage", "develop", "path_to_secrets", "path_in_repo_to_env_file") # github_org, repo_name, branch_or_tag
+    >>>
 Use the module registerImage:
     >>> # don't forget to authenticate to gcloud within your shell before trying this command
     >>> from bimage import registerImage
