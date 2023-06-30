@@ -6,7 +6,7 @@ This module builds an image via dockerpy
 
 import docker
 import shutil
-
+from bimage.exceptions import badCopyEnvException
 def buildImage(name: str, target: str, path_to_local_environment: str="", path_to_remote_environment: str=""):
     """
         The build image function.
@@ -20,7 +20,11 @@ def buildImage(name: str, target: str, path_to_local_environment: str="", path_t
     """
     
     if (path_to_local_environment and path_to_remote_environment):
-        shutil.copyfile(path_to_local_environment, path_to_remote_environment)
+        try:
+            shutil.copyfile(path_to_local_environment, path_to_remote_environment)
+        except badCopyEnvException:
+            raise(badCopyEnvException(path_to_local_environment, path_to_remote_environment))
+            
     
     client = docker.from_env()
     # print(os.getcwd())
