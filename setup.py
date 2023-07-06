@@ -46,8 +46,5 @@ setup(name="bimage",
                    "Topic :: Software Development :: Build Tools",
                    ],
       zip_safe=False,
-      test_suite="bimage.test",
-      scripts=[
-            'bimage/cloneRepo.py'
-              ]
+      test_suite="bimage.test"
     )

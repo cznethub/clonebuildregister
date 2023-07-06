@@ -4,54 +4,54 @@
 Tests for the bimage module.
 """
 
-
+# Standard lib
 import unittest
-import sys
-import docker
-sys.path.append('..')
-from bimage import buildImage
 import os
-import shutil
+# Third party
+import docker
+
+# Local
+from ..bimage import build_image
+
 
 
 class TestBuildImage(unittest.TestCase):
     """Test functions in the bimage module."""
 
-    def setUp(self):
-        """Opens a DockerFile and a simple html file to build."""
-        
-        os.chdir("bimage/test")
-        print(os.getcwd())
-        f = open("Dockerfile", 'a')
-        f.write("FROM continuumio/miniconda3:latest\n")
-        f.write("WORKDIR /\n")
-        f.write("COPY . .\n")
-        f.write("EXPOSE 80\n")
-        f.write("CMD [\"python\", \"-m\",  \"http.server\", \"80\"]\n")
-        f.close()
-        #f = open("index.html", 'a')
-        #f.write("<h1/>This is an h1 tag<h1>")
-        #.close()
-
     def tearDown(self):
         """Test fixture destroy."""
-        os.remove("Dockerfile")
-        #os.remove("index.html")
+
         client = docker.from_env()
 
-        client.images.remove("continuumio/miniconda3:latest")
         client.images.remove("testimage:v1")
+        client.images.remove("continuumio/miniconda3:latest")
+
         # client.images.remove(image[0].short_id)
         # client.images.remove("continuumio/miniconda3")
-        
-        
 
-    def test_bimage(self):
+    def test_build_image(self):
         """Test bimage.bimage."""
-        
-        image = buildImage.buildImage("testimage:v1", "")
-        
+        build_image("testimage:v1", "bimage/test")
+
         client = docker.from_env()
 
         self.assertTrue(len(client.images.list(name="testimage")) > 0)
-        
+
+
+    def test_build_image_env(self):
+        """Test clone repo with arguments defining environment variables, \
+            essentially all it does it tests the copying of environment files"""
+        build_image(
+            "testimage:v1", "bimage/test", "bimage/test/cloneRepoTestEnv.env", 
+            "bimage/test/cloneRepoTestFolder/cloneRepoTestEnv.env"
+        )
+        with open("bimage/test/cloneRepoTestFolder/cloneRepoTestEnv.env", "r", encoding='UTF-8') as file_desc:
+            read_bytes = file_desc.read()
+            self.assertEqual("CAT=MEOW", read_bytes)
+
+        # rewriting the image as it was before
+        with open("bimage/test/cloneRepoTestFolder/cloneRepoTestEnv.env", "w", encoding='UTF-8') as file_desc:
+            file_desc.write("DOG=RUFF")
+            file_desc.close()
+        client = docker.from_env()
+        self.assertTrue(len(client.images.list(name="testimage")) > 0)

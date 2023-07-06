@@ -50,8 +50,22 @@ Use the module cloneRepo:
     >>> from bimage import cloneRepo
     >>> cloneRepo.cloneRepo("cbcunc", "timage", "develop") # github_org, repo_name, branch_or_tag
     >>>
+Use the module cloneRepo with environment variable copy:
+    >>> from bimage import cloneRepo
+    >>> cloneRepo.cloneRepo("cbcunc", "timage", "develop", "path_to_secrets", "path_in_repo_to_env_file") # github_org, repo_name, branch_or_tag
+    >>>
 Use the module registerImage:
     >>> # don't forget to authenticate to gcloud within your shell before trying this command
     >>> from bimage import registerImage
     >>> response = registerImage.registerImage("testimage", "v2", "test-image-out", "v1", "us-east1", "bimage-project", "bimage-repository")
     >>> 
+
+How to configure bimage with gcloud as a developer
+**************************************************
+1. Create an account with Google Cloud at https://cloud.google.com 
+2. Create a new project called bimage-project
+3. Go to the google cloud artifact registry and create a repository called bimage-repository ensure the repository zone is us-east1
+4. From there goto the terminal where you cloned bimage and ensure you have the gcloud CLI installed https://cloud.google.com/sdk/docs/install
+5. Make sure to run $ gcloud init 
+6. Also ensure to run $ gcloud auth login
+7. The test cases should now work assuming you also have docker running in the background
