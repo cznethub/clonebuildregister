@@ -23,5 +23,5 @@ class TestCloneRepo(unittest.TestCase):
 
     def test_clonerepo(self):
         """Test bimage.bimage."""
-        cloneRepo.cloneRepo("cbcunc", "timage", "develop")
+        cloneRepo.clone_repo("cbcunc", "timage", "develop")
         self.assertTrue(os.path.exists("timage"))

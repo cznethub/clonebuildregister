@@ -3,49 +3,45 @@
 """
 Tests for the bimage module.
 """
-
-
-import unittest
-import sys
-import docker
-sys.path.append('..')
-from bimage import buildImage
+# Standard lib
 import os
+import unittest
 import shutil
+
+# Third party
+import docker
+
+# Local
+from ..bimage import bimage
 
 
 class TestBuildImage(unittest.TestCase):
     """Test functions in the bimage module."""
 
-    def setUp(self):
-        """Opens a DockerFile and a simple html file to build."""
-        
-        os.chdir("bimage/test")
-        
-        
-        #f = open("index.html", 'a')
-        #f.write("<h1/>This is an h1 tag<h1>")
-        #.close()
-
     def tearDown(self):
         """Test fixture destroy."""
-        
-        #os.remove("index.html")
-        client = docker.from_env()
 
+        client = docker.from_env()
         client.images.remove("continuumio/miniconda3:latest")
         client.images.remove("testimage:v1")
-        # client.images.remove(image[0].short_id)
-        # client.images.remove("continuumio/miniconda3")
-        
-        
+
+        shutil.rmtree("timage")
+
+        client.images.remove(
+            "us-east1-docker.pkg.dev/bimage-project/bimage-repository/testimage:v1"
+        )
+
 
     def test_bimage(self):
         """Test bimage.bimage."""
-        
-        image = buildImage.buildImage("testimage:v1", "")
-        
-        client = docker.from_env()
 
+        response = bimage("cbcunc", "timage", "develop", "testimage", "v1", "timage",
+               "testimage", "v1", "us-east1", "bimage-project", "bimage-repository"
+        )
+        client = docker.from_env()
         self.assertTrue(len(client.images.list(name="testimage")) > 0)
-        
+
+
+        self.assertTrue(os.path.exists("timage"))
+
+        self.assertFalse("errorDetail" in response)
