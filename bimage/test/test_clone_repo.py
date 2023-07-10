@@ -4,18 +4,17 @@
 Tests for the bimage module.
 """
 
-
-import unittest
-import sys
-sys.path.append('..')
-from bimage import cloneRepo
+# Standard Lib
 import os
 import shutil
+import unittest
+
+# Local
+from bimage import clone_repo
 
 
 class TestCloneRepo(unittest.TestCase):
     """Test functions in the bimage module."""
-    
 
     def tearDown(self):
         """Test fixture destroy."""
@@ -23,5 +22,5 @@ class TestCloneRepo(unittest.TestCase):
 
     def test_clonerepo(self):
         """Test bimage.bimage."""
-        cloneRepo.clone_repo("cbcunc", "timage", "develop")
+        clone_repo.clone_repo("cbcunc", "timage", "develop")
         self.assertTrue(os.path.exists("timage"))

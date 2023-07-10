@@ -11,8 +11,8 @@ from setuptools import find_packages
 def version():
     """Get the version number."""
 
-    with open("VERSION.txt") as v:
-        _version = v.read()
+    with open("VERSION.txt", encoding='UTF-8') as version_fd:
+        _version = version_fd.read()
     return _version.strip()
 
 
@@ -22,10 +22,10 @@ __version__ = version()
 def long_description():
     """Construct the long description text."""
 
-    with open("README.rst") as r:
-        long_description_1 = r.read()
-    with open("HISTORY.txt") as h:
-        long_description_2 = h.read()
+    with open("README.rst", encoding='UTF-8') as readme_fd:
+        long_description_1 = readme_fd.read()
+    with open("HISTORY.txt", encoding='UTF-8') as history_fd:
+        long_description_2 = history_fd.read()
     return "\n".join([long_description_1, long_description_2, ])
 
 
@@ -47,4 +47,4 @@ setup(name="bimage",
                    ],
       zip_safe=False,
       test_suite="bimage.test"
-    )
+      )

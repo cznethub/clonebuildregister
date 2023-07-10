@@ -31,16 +31,14 @@ class TestBuildImage(unittest.TestCase):
             "us-east1-docker.pkg.dev/bimage-project/bimage-repository/testimage:v1"
         )
 
-
     def test_bimage(self):
         """Test bimage.bimage."""
 
         response = bimage("cbcunc", "timage", "develop", "testimage", "v1", "timage",
-               "testimage", "v1", "us-east1", "bimage-project", "bimage-repository"
-        )
+                          "testimage", "v1", "us-east1", "bimage-project", "bimage-repository"
+                          )
         client = docker.from_env()
         self.assertTrue(len(client.images.list(name="testimage")) > 0)
-
 
         self.assertTrue(os.path.exists("timage"))
 

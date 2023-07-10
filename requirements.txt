@@ -1,21 +1,26 @@
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
 # platform: osx-arm64
+argparse=1.4.0=pypi_0
+attrs=22.1.0=py311hca03da5_0
 bcrypt=3.2.2=py311he2be06e_1
 bimage=0.1.0=dev_0
 brotli=1.0.9=h1a8c8d9_8
 brotli-bin=1.0.9=h1a8c8d9_8
 bzip2=1.0.8=h3422bc3_4
-ca-certificates=2023.5.7=hf0a4a13_0
-certifi=2023.5.7=pyhd8ed1ab_0
+ca-certificates=2023.05.30=hca03da5_0
+certifi=2023.5.7=py311hca03da5_0
 cffi=1.15.1=py311hae827db_3
 charset-normalizer=3.1.0=pyhd8ed1ab_0
+click=8.1.4=unix_pyh707e725_0
 cryptography=41.0.1=py311h5fb2c35_0
 docker-py=6.1.0=pyhd8ed1ab_0
 gitdb=4.0.10=pyhd8ed1ab_0
 github3.py=4.0.1=pyhd8ed1ab_0
 gitpython=3.1.31=pyhd8ed1ab_0
+google-cloud-sdk=435.0.1=py311h267d04e_0
 idna=3.4=pyhd8ed1ab_0
+iniconfig=1.1.1=pyhd3eb1b0_0
 libbrotlicommon=1.0.9=h1a8c8d9_8
 libbrotlidec=1.0.9=h1a8c8d9_8
 libbrotlienc=1.0.9=h1a8c8d9_8
@@ -29,12 +34,16 @@ openssl=3.1.1=h53f4e23_1
 packaging=23.1=pyhd8ed1ab_0
 paramiko=3.2.0=pyhd8ed1ab_0
 pip=23.1.2=pyhd8ed1ab_0
+pluggy=1.0.0=py311hca03da5_1
+pycodestyle=2.10.0=py311hca03da5_0
 pycparser=2.21=pyhd8ed1ab_0
 pyjwt=2.7.0=pyhd8ed1ab_0
 pynacl=1.5.0=py311he2be06e_2
 pysocks=1.7.1=pyha2e5f31_6
+pytest=7.3.1=py311hca03da5_0
 python=3.11.4=h47c9636_0_cpython
 python-dateutil=2.8.2=pyhd8ed1ab_0
+python-dotenv=1.0.0=pyhd8ed1ab_0
 python_abi=3.11=3_cp311
 pywin32-on-windows=0.1.0=pyh1179c8e_3
 readline=8.2=h92ec313_1
@@ -43,6 +52,7 @@ setuptools=67.7.2=pyhd8ed1ab_0
 six=1.16.0=pyh6c4a22f_0
 smmap=3.0.5=pyh44b312d_0
 tk=8.6.12=he1e0b03_0
+tomli=2.0.1=py311hca03da5_0
 typing_extensions=4.6.3=pyha770c72_0
 tzdata=2023c=h71feb2d_0
 uritemplate=4.1.1=pyhd8ed1ab_0

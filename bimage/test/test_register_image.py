@@ -11,10 +11,8 @@ import unittest
 import docker
 
 # Local
-from bimage import registerImage
-from bimage import buildImage
-
-
+from bimage import register_image
+from bimage import build_image
 
 
 class TestRegisterImage(unittest.TestCase):
@@ -22,7 +20,7 @@ class TestRegisterImage(unittest.TestCase):
     def setUp(self):
         """ Tests set up """
 
-        buildImage.build_image("testimage:v2", "bimage/test")
+        build_image.build_image("testimage:v2", "bimage/test")
 
     def tearDown(self):
         """Test fixture destroy."""
@@ -37,8 +35,8 @@ class TestRegisterImage(unittest.TestCase):
 
     def test_register_image(self):
         """Test bimage.bimage."""
-        response = registerImage.register_image(
-            "testimage", "v2", "test-image-out", "v1", "us-east1", "bimage-project", 
+        response = register_image.register_image(
+            "testimage", "v2", "test-image-out", "v1", "us-east1", "bimage-project",
             "bimage-repository"
         )
         self.assertFalse("errorDetail" in response)

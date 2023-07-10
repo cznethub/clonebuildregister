@@ -1,8 +1,9 @@
 """
-Exception module, that hold all custom exceptions this program utilizes for better use   
+Exception module, that hold all custom exceptions this program utilizes for better use
 """
 
-class badCopyEnvException(Exception):
+
+class BadCopyEnvException(Exception):
     """Exception raised for errors when cloning a repository from GitHub
 
     Attributes:
@@ -11,7 +12,7 @@ class badCopyEnvException(Exception):
         message -- explanation of the error
     """
 
-    def __init__(self, source_path, target_path, 
+    def __init__(self, source_path, target_path,
                  message="Copy of env failed (check source and target path)"):
         self.source_path = source_path
         self.target_path = target_path

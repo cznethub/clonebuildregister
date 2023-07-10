@@ -6,8 +6,9 @@ The registerImage module.
 
 import docker
 
-def register_image(local_image_name:str, local_image_tag:str, target_image_name:str, 
-                  target_image_tag:str, region:str, gcloud_project_id:str, repository_name:str):
+
+def register_image(local_image_name: str, local_image_tag: str, target_image_name: str,
+                   target_image_tag: str, region: str, gcloud_project_id: str, repository_name: str):
     """
     The registerImage function.
 
@@ -30,12 +31,11 @@ def register_image(local_image_name:str, local_image_tag:str, target_image_name:
     client = docker.from_env()
     image = client.images.get(f"{local_image_name}:{local_image_tag}")
     image.tag(
-        repository =
-        f"{region}-docker.pkg.dev/{gcloud_project_id}/{repository_name}/{target_image_name}",
-        tag        = target_image_tag
+        repository=f"{region}-docker.pkg.dev/{gcloud_project_id}/{repository_name}/{target_image_name}",
+        tag=target_image_tag
     )
     response = client.images.push(
         f"{region}-docker.pkg.dev/{gcloud_project_id}/{repository_name}/{target_image_name}",
-        tag = target_image_tag
+        tag=target_image_tag
     )
     return response
