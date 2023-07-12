@@ -75,3 +75,8 @@ Install python dependencies
 1. Navigate to bimage top-level folder
 2. Create a python environment so that your default environment doesn't get cluttered
 2. Run $ python setup.py develop
+
+Run Tests
+*********
+1. Navigate to bimage top-level folder 
+2. $ pytest
