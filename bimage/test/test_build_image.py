@@ -6,7 +6,6 @@ Tests for the bimage module.
 
 # Standard lib
 import unittest
-import os
 
 # Third party
 import docker
@@ -41,15 +40,15 @@ class TestBuildImage(unittest.TestCase):
         """Test clone repo with arguments defining environment variables,
             essentially all it does it tests the copying of environment files"""
         build_image(
-                    "testimage:v1", "bimage/test", "bimage/test/cloneRepoTestEnv.env",
-                    "bimage/test/cloneRepoTestFolder/cloneRepoTestEnv.env"
+                    "testimage:v1", "bimage/test", "bimage/test/buildImageTest.env",
+                    "bimage/test/buildImageTestFolder/buildImageTest.env"
                     )
-        with open("bimage/test/cloneRepoTestFolder/cloneRepoTestEnv.env", "r", encoding='UTF-8') as file_desc:
+        with open("bimage/test/buildImageTestFolder/buildImageTest.env", "r", encoding='UTF-8') as file_desc:
             read_bytes = file_desc.read()
             self.assertEqual("CAT=MEOW", read_bytes)
 
         # rewriting the image as it was before
-        with open("bimage/test/cloneRepoTestFolder/cloneRepoTestEnv.env", "w", encoding='UTF-8') as file_desc:
+        with open("bimage/test/buildImageTestFolder/buildImageTest.env", "w", encoding='UTF-8') as file_desc:
             file_desc.write("DOG=RUFF")
             file_desc.close()
         client = docker.from_env()
@@ -59,7 +58,7 @@ class TestBuildImage(unittest.TestCase):
         """Test clone repo with arguments defining environment variables, \
             testing whether env variables are imported for image"""
         build_image(
-            "testimage:v1", "bimage/test/testArgDockerfile", "bimage/test/cloneRepoTestEnv.env"
+            "testimage:v1", "bimage/test/testArgDockerfile", "bimage/test/buildImageTest.env"
         )
 
         client = docker.from_env()
