@@ -4,13 +4,10 @@
 Tests for the bimage module.
 """
 
-# Standard lib
 import unittest
 
-# Third party
 import docker
 
-# Local
 from bimage import register_image
 from bimage import build_image
 

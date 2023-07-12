@@ -3,7 +3,7 @@
 """
 The cloneRepo module.
 """
-# Third party
+
 import github3
 import git
 

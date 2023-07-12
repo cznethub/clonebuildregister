@@ -4,12 +4,10 @@
 Tests for the bimage module.
 """
 
-# Standard Lib
 import os
 import shutil
 import unittest
 
-# Local
 from bimage import clone_repo
 
 

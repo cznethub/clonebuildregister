@@ -3,14 +3,12 @@
 """
 This module builds an image via dockerpy
 """
-# Standard lib
+
 import shutil
 
-# Third party
 import docker
 from dotenv import dotenv_values
 
-# Local
 from bimage.exceptions import BadCopyEnvException
 
 

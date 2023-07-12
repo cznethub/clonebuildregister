@@ -4,13 +4,10 @@
 Tests for the bimage module.
 """
 
-# Standard lib
 import unittest
 
-# Third party
 import docker
 
-# Local
 from ..bimage import build_image
 
 
@@ -25,8 +22,6 @@ class TestBuildImage(unittest.TestCase):
         client.images.remove("testimage:v1", force=True)
         client.images.remove("continuumio/miniconda3:latest", force=True)
 
-        # client.images.remove(image[0].short_id)
-        # client.images.remove("continuumio/miniconda3")
 
     def test_build_image(self):
         """Test bimage.bimage."""

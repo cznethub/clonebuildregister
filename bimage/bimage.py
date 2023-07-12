@@ -4,7 +4,6 @@
 bimage.py, master program that brings all the modules in the bimage package together
 """
 
-# Local
 from .build_image import build_image
 from .clone_repo import clone_repo
 from .register_image import register_image

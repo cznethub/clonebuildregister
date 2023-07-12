@@ -3,11 +3,9 @@
 """
 A __main__ namespace for the bimage package.
 """
-# System import
 import sys
-# Third party
 import argparse
-# Local
+
 from .bimage import bimage
 
 

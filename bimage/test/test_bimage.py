@@ -8,10 +8,8 @@ import os
 import unittest
 import shutil
 
-# Third party
 import docker
 
-# Local
 from ..bimage import bimage
 
 
