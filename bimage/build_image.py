@@ -8,7 +8,7 @@ import shutil
 
 # Third party
 import docker
-from dotenv import load_dotenv
+from dotenv import dotenv_values
 
 # Local
 from bimage.exceptions import BadCopyEnvException
@@ -33,19 +33,20 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
     """
 
     if (path_to_local_environment and path_to_remote_environment):
-        load_dotenv(dotenv_path=path_to_local_environment)
+        env_values = dotenv_values(path_to_local_environment)
         try:
             shutil.copyfile(path_to_local_environment, path_to_remote_environment)
         except BadCopyEnvException(path_to_local_environment, path_to_remote_environment) as exc:
             print(exc)
     if (path_to_local_environment and not path_to_remote_environment):
-        load_dotenv(dotenv_path=path_to_local_environment)
+        env_values = dotenv_values(path_to_local_environment)
     else:
-        load_dotenv()
+        env_values = dotenv_values(".env") # try something basic
     client = docker.from_env()
     image = client.images.build(
         rm=True,
         path=f"./{target}/",
-        tag={name}
+        tag={name},
+        buildargs=dict(env_values)
     )
     return image

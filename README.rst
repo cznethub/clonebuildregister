@@ -69,3 +69,9 @@ How to configure bimage with gcloud as a developer
 5. Make sure add to path and run $ gcloud init, ensuring you choose bimage-project
 6. Also ensure to run $ gcloud auth login, if needed
 7. The test cases should now work assuming you also have docker running in the background and have already run $ python setup.py develop
+
+Install python dependencies
+***************************
+1. Navigate to bimage top-level folder
+2. Create a python environment so that your default environment doesn't get cluttered
+2. Run $ python setup.py develop

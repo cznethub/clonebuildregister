@@ -23,8 +23,8 @@ class TestBuildImage(unittest.TestCase):
 
         client = docker.from_env()
 
-        client.images.remove("testimage:v1")
-        client.images.remove("continuumio/miniconda3:latest")
+        client.images.remove("testimage:v1", force=True)
+        client.images.remove("continuumio/miniconda3:latest", force=True)
 
         # client.images.remove(image[0].short_id)
         # client.images.remove("continuumio/miniconda3")
@@ -59,8 +59,10 @@ class TestBuildImage(unittest.TestCase):
         """Test clone repo with arguments defining environment variables, \
             testing whether env variables are imported for image"""
         build_image(
-            "testimage:v1", "bimage/test", "bimage/test/cloneRepoTestEnv.env"
+            "testimage:v1", "bimage/test/testArgDockerfile", "bimage/test/cloneRepoTestEnv.env"
         )
-        self.assertEqual("MEOW", os.environ["CAT"])
+
         client = docker.from_env()
+        output = client.containers.run('testimage:v1')
+        self.assertEqual(b"The cat goes, MEOW\n", output)
         self.assertTrue(len(client.images.list(name="testimage")) > 0)
