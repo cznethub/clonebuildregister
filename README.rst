@@ -7,8 +7,8 @@ Clones a repository, builds a docker image from that repository, and then pushes
 
 To use bimage as a package:
 
-    >>> from bimage import bimage
-    >>> bimage.bimage("cbcunc" "timage" "develop" "testimage" "v1" "timage" "testimage" "v1" "us-east1" "bimage-project" "bimage-repository")
+    >>> from bimage.bimage import bimage
+    >>> bimage("cbcunc" "timage" "develop" "testimage" "v1" "timage" "testimage" "v1" "us-east1" "bimage-project" "bimage-repository")
     >>>
 
 To use bimage as a script:
@@ -43,21 +43,21 @@ To use bimage as a script:
 Use modules of bimage
 *********************
 Use the module buildImage:
-    >>> from bimage import buildImage
-    >>> image = buildImage.buildImage("testimage:v1","") # if Dockerfile in current directory, use 2nd argument as target directory
+    >>> from bimage.buildImage import buildImage
+    >>> image = buildImage("testimage:v1","") # if Dockerfile in current directory, use 2nd argument as target directory
     >>>
 Use the module cloneRepo:
-    >>> from bimage import cloneRepo
-    >>> cloneRepo.cloneRepo("cbcunc", "timage", "develop") # github_org, repo_name, branch_or_tag
+    >>> from bimage.cloneRepo import cloneRepo
+    >>> cloneRepo("cbcunc", "timage", "develop") # github_org, repo_name, branch_or_tag
     >>>
 Use the module cloneRepo with environment variable copy:
-    >>> from bimage import cloneRepo
-    >>> cloneRepo.cloneRepo("cbcunc", "timage", "develop", "path_to_secrets", "path_in_repo_to_env_file") # github_org, repo_name, branch_or_tag
+    >>> from bimage.cloneRepo import cloneRepo
+    >>> cloneRepo("cbcunc", "timage", "develop", "path_to_secrets", "path_in_repo_to_env_file") # github_org, repo_name, branch_or_tag
     >>>
 Use the module registerImage:
     >>> # don't forget to authenticate to gcloud within your shell before trying this command
-    >>> from bimage import registerImage
-    >>> response = registerImage.registerImage("testimage", "v2", "test-image-out", "v1", "us-east1", "bimage-project", "bimage-repository")
+    >>> from bimage.registerImage import registerImage
+    >>> response = registerImage("testimage", "v2", "test-image-out", "v1", "us-east1", "bimage-project", "bimage-repository")
     >>> 
 
 How to configure bimage with gcloud as a developer
