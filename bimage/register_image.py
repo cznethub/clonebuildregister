@@ -4,7 +4,12 @@
 The registerImage module.
 """
 
+from pprint import pprint
+
 import docker
+
+from bimage.exceptions import GCloudRegisterImageException
+
 
 
 def register_image(local_image_name: str, local_image_tag: str, target_image_name: str,
@@ -34,8 +39,14 @@ def register_image(local_image_name: str, local_image_tag: str, target_image_nam
         repository=f"{region}-docker.pkg.dev/{gcloud_project_id}/{repository_name}/{target_image_name}",
         tag=target_image_tag
     )
+
     response = client.images.push(
         f"{region}-docker.pkg.dev/{gcloud_project_id}/{repository_name}/{target_image_name}",
         tag=target_image_tag
     )
+
+    if ('errorDetail' in response):
+        pprint(response)
+        raise GCloudRegisterImageException()
+
     return response
