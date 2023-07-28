@@ -7,6 +7,8 @@ The cloneRepo module.
 import github3
 import git
 
+from bimage.exceptions import CloneRepositoryException
+
 
 def clone_repo(github_org: str, repo_name: str, branch_or_tag: str):
     """Clones a repository from github, and can optionally overwrite env files in the \
@@ -19,6 +21,9 @@ def clone_repo(github_org: str, repo_name: str, branch_or_tag: str):
     """
 
     git_client = github3.GitHub()
-    repo = git_client.repository(github_org, repo_name)
-    clone = git.Repo.clone_from(repo.clone_url, repo_name)
-    clone.git.checkout(branch_or_tag)
+    try:
+        repo = git_client.repository(github_org, repo_name)
+        clone = git.Repo.clone_from(repo.clone_url, repo_name)
+        clone.git.checkout(branch_or_tag)
+    except Exception as exc:
+        raise CloneRepositoryException from exc

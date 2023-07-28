@@ -10,6 +10,7 @@ import docker
 from dotenv import dotenv_values
 
 from bimage.exceptions import BadCopyEnvException
+from bimage.exceptions import BuildImageException
 
 
 def build_image(name: str, target: str, path_to_local_environment: str = "",
@@ -41,10 +42,13 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
     else:
         env_values = dotenv_values(".env") # try something basic
     client = docker.from_env()
-    image = client.images.build(
-        rm=True,
-        path=f"./{target}/",
-        tag={name},
-        buildargs=dict(env_values)
-    )
+    try:
+        image = client.images.build(
+            rm=True,
+            path=f"./{target}/",
+            tag={name},
+            buildargs=dict(env_values)
+        )
+    except Exception as exc:
+        raise BuildImageException() from exc
     return image

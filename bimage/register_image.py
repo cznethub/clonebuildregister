@@ -9,7 +9,7 @@ from pprint import pprint
 import docker
 
 from bimage.exceptions import GCloudRegisterImageException
-
+from bimage.exceptions import TagImageException
 
 
 def register_image(local_image_name: str, local_image_tag: str, target_image_name: str,
@@ -34,19 +34,22 @@ def register_image(local_image_name: str, local_image_tag: str, target_image_nam
 
     # first the image needs to be tagged
     client = docker.from_env()
-    image = client.images.get(f"{local_image_name}:{local_image_tag}")
-    image.tag(
-        repository=f"{region}-docker.pkg.dev/{gcloud_project_id}/{repository_name}/{target_image_name}",
-        tag=target_image_tag
-    )
+    try:
+        image = client.images.get(f"{local_image_name}:{local_image_tag}")
+        image.tag(
+            repository=f"{region}-docker.pkg.dev/{gcloud_project_id}/{repository_name}/{target_image_name}",
+            tag=target_image_tag
+        )
+    except Exception as exc:
+        raise TagImageException() from exc
 
     response = client.images.push(
         f"{region}-docker.pkg.dev/{gcloud_project_id}/{repository_name}/{target_image_name}",
         tag=target_image_tag
     )
 
-    if ('errorDetail' in response):
+    if 'errorDetail' in response:
         pprint(response)
-        raise GCloudRegisterImageException()
+        raise GCloudRegisterImageException() from Exception()
 
     return response

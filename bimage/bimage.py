@@ -7,6 +7,7 @@ bimage.py, master program that brings all the modules in the bimage package toge
 from .build_image import build_image
 from .clone_repo import clone_repo
 from .register_image import register_image
+from bimage.exceptions import BimageException
 
 
 def bimage(github_org: str, repo_name: str, branch_or_tag: str, local_image_name: str,
@@ -37,10 +38,12 @@ def bimage(github_org: str, repo_name: str, branch_or_tag: str, local_image_name
         repositoryName (str): The name of the google cloud artifact registry that
               holds docker images
     """
-
-    clone_repo(github_org, repo_name, branch_or_tag)
-    build_image(f"{local_image_name}:{local_image_tag}", path_to_dockerfile)
-    response = register_image(local_image_name, local_image_tag, target_image_name,
-                              target_image_tag, region, gcloud_project_id, repository_name)
+    try:
+        clone_repo(github_org, repo_name, branch_or_tag)
+        build_image(f"{local_image_name}:{local_image_tag}", path_to_dockerfile)
+        response = register_image(local_image_name, local_image_tag, target_image_name,
+                                target_image_tag, region, gcloud_project_id, repository_name)
+    except Exception() as exc:
+        raise BimageException from exc
 
     return response

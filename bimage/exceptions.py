@@ -24,3 +24,54 @@ class BadCopyEnvException(Exception):
         self.target_path = target_path
         self.message = message
         super().__init__(self.message)
+
+class BuildImageException(Exception):
+    """Exception raised for errors when building an image
+
+    Attributes:
+        message -- explanation of the error
+    """
+
+    def __init__(self,
+                 message="Building image has failed. Try docker build cli for better error messages"):
+        self.message = message
+        super().__init__(self.message)
+
+class TagImageException(Exception):
+    """Exception raised for errors when tagging an image before registering it gcloud artifact registry
+
+    Attributes:
+        message -- explanation of the error
+    """
+
+    def __init__(self,
+                 message="Error tagging image before registering it to gcloud artifact registry. \
+                    Check local_image_tag is correct."):
+        self.message = message
+        super().__init__(self.message)
+
+class CloneRepositoryException(Exception):
+    """Exception raised for errors when building an image
+
+    Attributes:
+        message -- explanation of the error
+    """
+
+    def __init__(self,
+                 message="Cloning repo has failed. Check arguments pertaining to github repos"):
+        self.message = message
+        super().__init__(self.message)
+
+class BimageException(Exception):
+    """Exception raised for errors when cloning a repo, building an image, and posting it to gcloud
+
+    Attributes:
+        message -- explanation of the error
+    """
+
+    def __init__(self,
+                 message="Something has gone wrong running bimage, check params"):
+        self.message = message
+        super().__init__(self.message)
+
+
