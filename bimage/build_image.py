@@ -35,7 +35,7 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
         env_values = dotenv_values(path_to_local_environment)
         try:
             shutil.copyfile(path_to_local_environment, path_to_remote_environment)
-        except Exception() as exc:
+        except Exception as exc:
             raise BadCopyEnvException(path_to_local_environment, path_to_remote_environment) from exc
     if (path_to_local_environment and not path_to_remote_environment):
         env_values = dotenv_values(path_to_local_environment)
