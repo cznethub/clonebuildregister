@@ -49,6 +49,13 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
             tag={name},
             buildargs=dict(env_values)
         )
+        for item in image[1]:
+            for key, value in item.items():
+                #print(key, ':', value)
+                if key == 'stream':
+                    text = value.strip()
+                    if text:
+                        print(text)
     except Exception as exc:
         raise BuildImageException() from exc
     return image
