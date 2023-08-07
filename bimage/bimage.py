@@ -43,7 +43,7 @@ def bimage(github_org: str, repo_name: str, branch_or_tag: str, local_image_name
         build_image(f"{local_image_name}:{local_image_tag}", path_to_dockerfile)
         response = register_image(local_image_name, local_image_tag, target_image_name,
                                 target_image_tag, region, gcloud_project_id, repository_name)
-    except Exception() as exc:
+    except Exception as exc:
         raise BimageException from exc
 
     return response
