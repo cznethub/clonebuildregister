@@ -14,7 +14,7 @@ from bimage.exceptions import BuildImageException
 
 
 def build_image(name: str, target: str, path_to_local_environment: str = "",
-                path_to_remote_environment: str = ""):
+                path_to_remote_environment: str = "", platform: str=""):
     """The build image function.
 
     Args:
@@ -26,6 +26,7 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
                 Defaults to "".
         path_to_remote_environment (str, optional): The path to the dummy environment
                 files found on github (e.g usr/home/bimage/.env). Defaults to "".
+        platform (str, optional): The target platform in the format os[/arch[/variant]].
 
     Returns:
         Image: Returns image object that was built by this function
@@ -42,13 +43,23 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
     else:
         env_values = dotenv_values(".env") # try something basic
     client = docker.from_env()
+    print("This is the target platform ->" + platform)
     try:
-        image = client.images.build(
-            rm=True,
-            path=f"./{target}/",
-            tag={name},
-            buildargs=dict(env_values)
-        )
+        if platform:
+            image = client.images.build(
+                rm=True,
+                path=f"./{target}/",
+                tag={name},
+                buildargs=dict(env_values),
+                platform=platform
+            )
+        else:
+            image = client.images.build(
+                rm=True,
+                path=f"./{target}/",
+                tag={name},
+                buildargs=dict(env_values)
+            )
         for item in image[1]:
             for key, value in item.items():
                 #print(key, ':', value)

@@ -6,7 +6,7 @@ A __main__ namespace for the bimage package.
 import sys
 import argparse
 
-from .bimage import bimage
+from bimage.bimage import bimage
 
 
 def main(argv):
@@ -81,12 +81,22 @@ def main(argv):
     parser.add_argument("repositoryName",
                         help="The name of the google cloud artifact registry that holds \
                             docker images")
+    parser.add_argument("--l", "-path_to_local_environment",
+                        help="The path to a local environment \
+                file with secrets not to be seen on github (e.g usr/home/bimage/.env). \
+                Defaults to "".")
+    parser.add_argument("--r", "-path_to_remote_environment",
+                        help="The path to the dummy environment \
+                files found on github (e.g usr/home/bimage/.env). Defaults to "".")
+    parser.add_argument("--p", "-platform", help="The target platform of the image in the \
+                         form of os[/arch[/variant]]")
     args = parser.parse_args(argv)
     bimage(args.github_org, args.repo_name, args.branch_or_tag,
            args.local_image_name, args.local_image_tag,
            args.path_to_dockerfile, args.target_image_name,
            args.target_image_tag, args.region, args.gcloudProjectId,
-           args.repositoryName)
+           args.repositoryName, args.path_to_local_environment,
+           args.path_to_remote_environment, args.platform)
 
 
 if __name__ == '__main__':
