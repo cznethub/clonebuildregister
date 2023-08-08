@@ -15,34 +15,36 @@ from bimage.exceptions import TagImageException
 class TestRegisterImage(unittest.TestCase):
     """Test registerImage in the bimage module. Relies on buildImage"""
 
-
     def test_clone_repo_fail(self):
         """This test tries throwing exception on clone_repo
         """
-        # self.assertRaises(CloneRepositoryException, clone_repo("meow", "this_repo_don'texists", "1232132tttt"))
-        # with self.assertRaises(CloneRepositoryException):
+
         try:
             clone_repo("meow", "this_repo_don'texists", "1232132tttt")
         except CloneRepositoryException as exc:
-            self.assertEqual(exc.message, "Cloning repo has failed. Check arguments pertaining to github repos")
+            self.assertEqual(exc.message, "Cloning repo has failed. \
+                             Check arguments pertaining to github repos")
 
     def test_build_image_fail(self):
         """ Test tries building a faulty image"""
-       
+
         try:
-            build_image("meow", ".") # there is no dockerfile in this directory
+            build_image("meow", ".")  # there is no dockerfile in this directory
         except BuildImageException as exc:
-            self.assertEqual(exc.message, "Building image has failed. Try docker build cli for better error messages")
+            self.assertEqual(exc.message, "Building image has failed. \
+                             Try docker build cli for better error messages")
 
     def test_register_image_fail(self):
         """ Test tries building a faulty image"""
 
         try:
             register_image("meow1111", "v12", "rufff12", "v12", "idkwhere", "this_is_notaproject",
-                           "funnynamehere") # there is no dockerfile in this directory
+                           "funnynamehere")  # there is no dockerfile in this directory
         except TagImageException as exc:
-            self.assertEqual(exc.message, "Error tagging image before registering it to gcloud artifact registry. \
+            self.assertEqual(exc.message, "Error tagging image before \
+                             registering it to gcloud artifact registry. \
                     Check local_image_tag is correct.")
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     unittest.main()

@@ -22,7 +22,6 @@ class TestBuildImage(unittest.TestCase):
         client.images.remove("testimage:v1", force=True)
         client.images.remove("continuumio/miniconda3:latest", force=True)
 
-
     def test_build_image(self):
         """Test bimage.bimage."""
         build_image("testimage:v1", "bimage/test")

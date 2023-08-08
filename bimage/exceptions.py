@@ -1,6 +1,8 @@
 """
 Exception module, that hold all custom exceptions this program utilizes for better use
 """
+
+
 class GCloudRegisterImageException(Exception):
     """Exception raised when registering image to google cloud fails
     """
@@ -8,6 +10,7 @@ class GCloudRegisterImageException(Exception):
                   the issue then try gcloud init or check if network is causing the issue."):
         self.message = message
         super().__init__(self.message)
+
 
 class BadCopyEnvException(Exception):
     """Exception raised for errors when cloning a repository from GitHub
@@ -25,6 +28,7 @@ class BadCopyEnvException(Exception):
         self.message = message
         super().__init__(self.message)
 
+
 class BuildImageException(Exception):
     """Exception raised for errors when building an image
 
@@ -36,6 +40,7 @@ class BuildImageException(Exception):
                  message="Building image has failed. Try docker build cli for better error messages"):
         self.message = message
         super().__init__(self.message)
+
 
 class TagImageException(Exception):
     """Exception raised for errors when tagging an image before registering it gcloud artifact registry
@@ -50,6 +55,7 @@ class TagImageException(Exception):
         self.message = message
         super().__init__(self.message)
 
+
 class CloneRepositoryException(Exception):
     """Exception raised for errors when building an image
 
@@ -62,6 +68,7 @@ class CloneRepositoryException(Exception):
         self.message = message
         super().__init__(self.message)
 
+
 class BimageException(Exception):
     """Exception raised for errors when cloning a repo, building an image, and posting it to gcloud
 
@@ -73,5 +80,3 @@ class BimageException(Exception):
                  message="Something has gone wrong running bimage, check params"):
         self.message = message
         super().__init__(self.message)
-
-

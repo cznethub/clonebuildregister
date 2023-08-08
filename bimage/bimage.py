@@ -13,8 +13,8 @@ from bimage.exceptions import BimageException
 def bimage(github_org: str, repo_name: str, branch_or_tag: str, local_image_name: str,
            local_image_tag: str, path_to_dockerfile: str, target_image_name: str,
            target_image_tag: str, region: str, gcloud_project_id: str, repository_name: str,
-           path_to_local_environment: str = "", path_to_remote_environment: str = "", 
-           platform: str=""):
+           path_to_local_environment: str = "", path_to_remote_environment: str = "",
+           platform: str = ""):
     """The bimage function, that brings together cloning a repository, building an image, and
     registering that image to the google cloud artifact registry. Given the bash shell
     is authenticated with google cloud before running the program.
@@ -44,7 +44,7 @@ def bimage(github_org: str, repo_name: str, branch_or_tag: str, local_image_name
                 Defaults to "".
         path_to_remote_environment (str, optional): The path to the dummy environment
                 files found on github (e.g usr/home/bimage/.env). Defaults to "".
-        platform (str, optional): The target platform of the image in the form of 
+        platform (str, optional): The target platform of the image in the form of
               os[/arch[/variant]]
     """
     try:
@@ -52,7 +52,7 @@ def bimage(github_org: str, repo_name: str, branch_or_tag: str, local_image_name
         build_image(f"{local_image_name}:{local_image_tag}", path_to_dockerfile,
                     path_to_local_environment, path_to_remote_environment, platform)
         response = register_image(local_image_name, local_image_tag, target_image_name,
-                                target_image_tag, region, gcloud_project_id, repository_name)
+                                  target_image_tag, region, gcloud_project_id, repository_name)
     except Exception as exc:
         raise BimageException from exc
 

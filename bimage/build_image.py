@@ -14,7 +14,7 @@ from bimage.exceptions import BuildImageException
 
 
 def build_image(name: str, target: str, path_to_local_environment: str = "",
-                path_to_remote_environment: str = "", platform: str=""):
+                path_to_remote_environment: str = "", platform: str = ""):
     """The build image function.
 
     Args:
@@ -41,7 +41,7 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
     if (path_to_local_environment and not path_to_remote_environment):
         env_values = dotenv_values(path_to_local_environment)
     else:
-        env_values = dotenv_values(".env") # try something basic
+        env_values = dotenv_values(".env")
     client = docker.from_env()
     print("This is the target platform ->" + platform)
     try:
@@ -62,7 +62,6 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
             )
         for item in image[1]:
             for key, value in item.items():
-                #print(key, ':', value)
                 if key == 'stream':
                     text = value.strip()
                     if text:
