@@ -34,14 +34,16 @@ To use bimage as a script:
       gcloudProjectId     The project id from which the image will be stored under in a google artifact registry
       repositoryName      The name of the google cloud artifact registry that holds docker images
       ==================  ===================================================================================================
+    
     options:
-      -h, --help          show this help message and exit
-      --l L, -path_to_local_environment L
+
+        - -h, --help          show this help message and exit
+        - --l L, -path_to_local_environment L
                         The path to a local environment file with secrets not to be seen on github (e.g usr/home/bimage/.env). Defaults to .
                         (default: None)
-      --r R, -path_to_remote_environment R
+        - --r R, -path_to_remote_environment R
                         The path to the dummy environment files found on github (e.g usr/home/bimage/.env). Defaults to . (default: None)
-       --p P, -platform P    The target platform of the image in the form of os[/arch[/variant]] (default: None)
+        - --p P, -platform P    The target platform of the image in the form of os[/arch[/variant]] (default: None)
     
     example:
         $ python bimage cbcunc timage develop testimage v1 timage testimage v1 us-east1 bimage-project bimage-repository
