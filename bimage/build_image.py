@@ -43,7 +43,6 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
     else:
         env_values = dotenv_values(".env")
     client = docker.from_env()
-    print("This is the target platform ->" + platform)
     try:
         if platform:
             image = client.images.build(

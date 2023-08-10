@@ -81,15 +81,16 @@ def main(argv):
     parser.add_argument("repositoryName",
                         help="The name of the google cloud artifact registry that holds \
                             docker images")
-    parser.add_argument("--l", "-path_to_local_environment",
+    parser.add_argument("-l", "--path_to_local_environment",
                         help="The path to a local environment \
                 file with secrets not to be seen on github (e.g usr/home/bimage/.env). \
-                Defaults to "".")
-    parser.add_argument("--r", "-path_to_remote_environment",
+                Defaults to "".", default="")
+    parser.add_argument("-r", "--path_to_remote_environment",
                         help="The path to the dummy environment \
-                files found on github (e.g usr/home/bimage/.env). Defaults to "".")
-    parser.add_argument("--p", "-platform", help="The target platform of the image in the \
-                         form of os[/arch[/variant]]")
+                files found on github (e.g usr/home/bimage/.env). Defaults to "".",
+                default="")
+    parser.add_argument("-p", "--platform", help="The target platform of the image in the \
+                         form of os[/arch[/variant]]", default="")
     args = parser.parse_args(argv)
     bimage(args.github_org, args.repo_name, args.branch_or_tag,
            args.local_image_name, args.local_image_tag,
