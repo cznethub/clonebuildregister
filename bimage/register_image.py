@@ -7,6 +7,8 @@ The registerImage module.
 from pprint import pprint
 
 import docker
+from google.cloud import artifactregistry_v1
+from google.api_core.exceptions import NotFound
 
 from bimage.exceptions import GCloudRegisterImageException
 from bimage.exceptions import TagImageException
@@ -31,6 +33,19 @@ def register_image(local_image_name: str, local_image_tag: str, target_image_nam
 
         Returns: None
     """
+    gcloud_client = artifactregistry_v1.ArtifactRegistryClient()
+    # get version of current tagged dspback
+
+    gcloud_request = artifactregistry_v1.GetTagRequest(name=f"projects/{gcloud_project_id}/locations/{region}/repositories/{repository_name}/packages/{target_image_name}/tags/{target_image_tag}")
+
+    # if no tagged dspback:develop then catch exception
+    # google.api_core.exceptions.NotFound: 404 Requested entity was not found.
+    gcloud_response = ""
+    try:
+        gcloud_response = gcloud_client.get_tag(request=gcloud_request)
+    except NotFound:
+        gcloud_response = "" # we really don't care if it breaks or not, we just wanted to know if dspback:devleop exists in the AR
+    # which holds response.version
 
     # first the image needs to be tagged
     client = docker.from_env()
@@ -51,5 +66,9 @@ def register_image(local_image_name: str, local_image_tag: str, target_image_nam
     if 'errorDetail' in response:
         pprint(response)
         raise GCloudRegisterImageException() from Exception()
+
+    if gcloud_response:
+        gcloud_request = artifactregistry_v1.DeleteVersionRequest(name=gcloud_response.version, force=True)
+        gcloud_client.delete_version(request=gcloud_request)
 
     return response
