@@ -1,0 +1,4 @@
+include VERSION.txt
+include HISTORY.txt
+include README.rst
+
