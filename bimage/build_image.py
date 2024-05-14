@@ -53,10 +53,13 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
                 platform=platform
             )
         else:
+            print(target)
+            print(name)
+            
             image = client.images.build(
                 rm=True,
-                path=f"./{target}/",
-                tag={name},
+                path=f"./{str(target)}/",
+                tag=name,
                 buildargs=dict(env_values)
             )
         for item in image[1]:
@@ -66,5 +69,5 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
                     if text:
                         print(text)
     except Exception as exc:
-        raise BuildImageException() from exc
+        raise BuildImageException from exc
     return image

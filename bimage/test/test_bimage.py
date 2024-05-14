@@ -10,7 +10,7 @@ import shutil
 
 import docker
 
-from ..bimage import bimage
+from bimage import bimage
 
 
 class TestBuildImage(unittest.TestCase):
@@ -26,14 +26,14 @@ class TestBuildImage(unittest.TestCase):
         shutil.rmtree("timage")
 
         client.images.remove(
-            "us-east1-docker.pkg.dev/bimage-project/bimage-repository/testimage:v1"
+            "us-east1-docker.pkg.dev/bimage-project-423316/bimage-repository/testimage:v1"
         )
 
     def test_bimage(self):
         """Test bimage.bimage."""
 
-        response = bimage("cbcunc", "timage", "develop", "testimage", "v1", "timage",
-                          "testimage", "v1", "us-east1", "bimage-project", "bimage-repository"
+        response = bimage.bimage("cbcunc", "timage", "develop", "testimage", "v1", "timage",
+                          "testimage", "v1", "us-east1", "bimage-project-423316", "bimage-repository"
                           )
         client = docker.from_env()
         self.assertTrue(len(client.images.list(name="testimage")) > 0)

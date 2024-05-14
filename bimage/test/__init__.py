@@ -1,5 +1,5 @@
 #! /usr/bin/env python
 
 """
-The bimage.tests subpackage.
+Test folder for bimage.
 """

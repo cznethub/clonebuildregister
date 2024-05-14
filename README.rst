@@ -83,9 +83,10 @@ Install python dependencies
 ***************************
 1. Navigate to bimage top-level folder
 2. Create a python environment so that your default environment doesn't get cluttered
-3. Run $ python setup.py develop
+3. Run $ conda install --file requirements.txt
 
 Run Tests
 *********
 1. Navigate to bimage top-level folder 
-2. $ pytest
+2. $ python -m pytest
+3. If it doesn't work, do this. Replace all string instances of bimage-project-###### with the project id that you have been given. TODO: make it simpler so that you don't have to do the previous step.

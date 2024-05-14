@@ -26,4 +26,4 @@ def clone_repo(github_org: str, repo_name: str, branch_or_tag: str):
         clone = git.Repo.clone_from(repo.clone_url, repo_name)
         clone.git.checkout(branch_or_tag)
     except Exception as exc:
-        raise CloneRepositoryException from exc
+        raise CloneRepositoryException() from exc

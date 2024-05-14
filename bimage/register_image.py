@@ -8,7 +8,7 @@ from pprint import pprint
 
 import docker
 from google.cloud import artifactregistry_v1
-from google.api_core.exceptions import NotFound
+# from google.api_core.exceptions import NotFound
 
 from bimage.exceptions import GCloudRegisterImageException
 from bimage.exceptions import TagImageException
@@ -43,7 +43,7 @@ def register_image(local_image_name: str, local_image_tag: str, target_image_nam
     gcloud_response = ""
     try:
         gcloud_response = gcloud_client.get_tag(request=gcloud_request)
-    except NotFound:
+    except Exception: # very bad practice, but I want this to work. Exceptions, should be specific.
         gcloud_response = "" # we really don't care if it breaks or not, we just wanted to know if dspback:devleop exists in the AR
     # which holds response.version
 
