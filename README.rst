@@ -76,7 +76,8 @@ How to configure bimage with gcloud as a developer
 4. From there goto the terminal where you cloned bimage and ensure you have the gcloud CLI installed https://cloud.google.com/sdk/docs/install
 5. Make sure add to path and run $ gcloud init, ensuring you choose bimage-project
 6. Also ensure to run $ gcloud auth login, if needed
-7. The test cases should now work assuming you also have docker running in the background and have already run $ python setup.py develop
+7. Make sure $ cat ~/.docker/config.json contains us-east1. If not run $ gcloud auth configure-docker us-east1-docker.pkg.dev to add it.
+8. The test cases should now work assuming you also have docker running in the background and have already run $ python setup.py develop
 
 Install python dependencies
 ***************************
