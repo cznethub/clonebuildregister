@@ -48,7 +48,7 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
             image = client.images.build(
                 rm=True,
                 path=f"./{target}/",
-                tag={name},
+                tag=name,
                 buildargs=dict(env_values),
                 platform=platform
             )
