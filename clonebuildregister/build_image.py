@@ -9,8 +9,8 @@ import shutil
 import docker
 from dotenv import dotenv_values
 
-from bimage.exceptions import BadCopyEnvException
-from bimage.exceptions import BuildImageException
+from clonebuildregister.exceptions import BadCopyEnvException
+from clonebuildregister.exceptions import BuildImageException
 
 
 def build_image(name: str, target: str, path_to_local_environment: str = "",
@@ -22,10 +22,10 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
         target (str): The path that contains the dockerfile we want to build,
             "." for current directory. If clone_name used, insert "{clone_name}/..." to find Dockerfile
         path_to_local_environment (str, optional): The path to a local environment
-                file with secrets not to be seen on github (e.g usr/home/bimage/.env).
+                file with secrets not to be seen on github (e.g usr/home/clonebuildregister/.env).
                 Defaults to "".
         path_to_remote_environment (str, optional): The path to the dummy environment
-                files found on github (e.g usr/home/bimage/.env). Defaults to "".
+                files found on github (e.g usr/home/clonebuildregister/.env). Defaults to "".
         platform (str, optional): The target platform in the format os[/arch[/variant]].
 
     Returns:

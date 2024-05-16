@@ -10,8 +10,8 @@ import docker
 from google.cloud import artifactregistry_v1
 # from google.api_core.exceptions import NotFound
 
-from bimage.exceptions import GCloudRegisterImageException
-from bimage.exceptions import TagImageException
+from clonebuildregister.exceptions import GCloudRegisterImageException
+from clonebuildregister.exceptions import TagImageException
 
 
 def register_image(local_image_name: str, local_image_tag: str, target_image_name: str,

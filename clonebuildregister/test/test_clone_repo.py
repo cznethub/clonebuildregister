@@ -8,7 +8,7 @@ import os
 import shutil
 import unittest
 
-from bimage import clone_repo
+from clonebuildregister import clone_repo
 
 
 class TestCloneRepo(unittest.TestCase):

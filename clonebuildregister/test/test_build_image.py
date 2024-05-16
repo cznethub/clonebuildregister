@@ -1,18 +1,18 @@
 #! /usr/bin/env python
 
 """
-Tests for the bimage module.
+Tests for the clonebuildregister module.
 """
 
 import unittest
 
 import docker
 
-from ..bimage import build_image
+from ..clonebuildregister import build_image
 
 
 class TestBuildImage(unittest.TestCase):
-    """Test functions in the bimage module."""
+    """Test functions in the clonebuildregister module."""
 
     def tearDown(self):
         """Test fixture destroy."""
@@ -23,8 +23,8 @@ class TestBuildImage(unittest.TestCase):
         client.images.remove("continuumio/miniconda3:latest", force=True)
 
     def test_build_image(self):
-        """Test bimage.bimage."""
-        build_image("testimage:v1", "bimage/test")
+        """Test clonebuildregister.clonebuildregister."""
+        build_image("testimage:v1", "clonebuildregister/test")
 
         client = docker.from_env()
 
@@ -34,15 +34,15 @@ class TestBuildImage(unittest.TestCase):
         """Test clone repo with arguments defining environment variables,
             essentially all it does it tests the copying of environment files"""
         build_image(
-                    "testimage:v1", "bimage/test", "bimage/test/buildImageTest.env",
-                    "bimage/test/buildImageTestFolder/buildImageTest.env"
+                    "testimage:v1", "clonebuildregister/test", "clonebuildregister/test/buildImageTest.env",
+                    "clonebuildregister/test/buildImageTestFolder/buildImageTest.env"
                     )
-        with open("bimage/test/buildImageTestFolder/buildImageTest.env", "r", encoding='UTF-8') as file_desc:
+        with open("clonebuildregister/test/buildImageTestFolder/buildImageTest.env", "r", encoding='UTF-8') as file_desc:
             read_bytes = file_desc.read()
             self.assertEqual("CAT=MEOW", read_bytes)
 
         # rewriting the image as it was before
-        with open("bimage/test/buildImageTestFolder/buildImageTest.env", "w", encoding='UTF-8') as file_desc:
+        with open("clonebuildregister/test/buildImageTestFolder/buildImageTest.env", "w", encoding='UTF-8') as file_desc:
             file_desc.write("DOG=RUFF")
             file_desc.close()
         client = docker.from_env()
@@ -52,7 +52,7 @@ class TestBuildImage(unittest.TestCase):
         """Test clone repo with arguments defining environment variables, \
             testing whether env variables are imported for image"""
         build_image(
-            "testimage:v1", "bimage/test/testArgDockerfile", "bimage/test/buildImageTest.env"
+            "testimage:v1", "clonebuildregister/test/testArgDockerfile", "clonebuildregister/test/buildImageTest.env"
         )
 
         client = docker.from_env()

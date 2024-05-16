@@ -1,15 +1,15 @@
 #! /usr/bin/env python
 
 """
-Tests for the bimage module.
+Tests for the clonebuildregister module.
 """
 
 import unittest
 
 import docker
 
-from bimage import register_image
-from bimage import build_image
+from clonebuildregister import register_image
+from clonebuildregister import build_image
 
 
 
@@ -18,7 +18,7 @@ class TestRegisterImage(unittest.TestCase):
     def setUp(self):
         """ Tests set up """
         
-        build_image.build_image("testimage:v2", "bimage/test")
+        build_image.build_image("testimage:v2", "clonebuildregister/test")
 
     def tearDown(self):
         """Test fixture destroy."""
@@ -32,7 +32,7 @@ class TestRegisterImage(unittest.TestCase):
         )
 
     def test_register_image(self):
-        """Test bimage.bimage."""
+        """Test register_image.register_image."""
         response = register_image.register_image(
             "testimage", "v2", "test-image-out", "v1", "us-east1", "bimage-project-423316",
             "bimage-repository"

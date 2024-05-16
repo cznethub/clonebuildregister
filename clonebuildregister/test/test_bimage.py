@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 """
-Tests for the bimage module.
+Tests for the clonebuildregister module.
 """
 # Standard lib
 import os
@@ -10,11 +10,11 @@ import shutil
 
 import docker
 
-from bimage import bimage
+from clonebuildregister import clonebuildregister
 
 
 class TestBuildImage(unittest.TestCase):
-    """Test functions in the bimage module."""
+    """Test functions in the clonebuildregister module."""
 
     def tearDown(self):
         """Test fixture destroy."""
@@ -29,10 +29,10 @@ class TestBuildImage(unittest.TestCase):
             "us-east1-docker.pkg.dev/bimage-project-423316/bimage-repository/testimage:v1"
         )
 
-    def test_bimage(self):
-        """Test bimage.bimage."""
+    def test_clonebuildregister(self):
+        """Test clonebuildregister.clonebuildregister."""
 
-        response = bimage.bimage("cbcunc", "timage", "develop", "testimage", "v1", "timage",
+        response = clonebuildregister.clonebuildregister("cbcunc", "timage", "develop", "testimage", "v1", "timage",
                           "testimage", "v1", "us-east1", "bimage-project-423316", "bimage-repository"
                           )
         client = docker.from_env()
