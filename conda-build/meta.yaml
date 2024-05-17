@@ -1,5 +1,5 @@
 {% set name = "clonebuildregister" %}
-{% set version = "0.0.1" %}
+{% set version = "0.0.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,9 @@ package:
 
 source:
   url: https://github.com/cznethub/clonebuildregister/archive/{{ version }}.tar.gz
-  sha256: 91d1c315af978b0597786eb5b427197e19d5e07a38c999903bf962dd6ae62dd6
+  sha256: 67e8579d95645d720559e35ec8c9ceb09b6ab80aa8ac1eec077a9a21f42c8e23
+  path: ../../
+  
 
 build:
   noarch: python
@@ -15,9 +17,11 @@ build:
   number: 0
 
 requirements:
+  build:
+    - python
+    - setuptools
   host:
     - python
-    - setuptools >=61.0
     - pip
   run:
     - python
@@ -26,6 +30,15 @@ requirements:
     - github3.py
     - python-dotenv
     - google-cloud-artifact-registry
+    - grpcio-status
+
+test:
+  imports:
+    - clonebuildregister
+  commands:
+    - pip check
+  requires:
+    - pip
 
 about:
   home: https://github.com/cznethub/clonebuildregister
