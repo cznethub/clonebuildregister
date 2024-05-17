@@ -1,0 +1,37 @@
+{% set name = "clonebuildregister" %}
+{% set version = "0.0.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/cznethub/clonebuildregister/archive/{{ version }}.tar.gz
+  sha256: 91d1c315af978b0597786eb5b427197e19d5e07a38c999903bf962dd6ae62dd6
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python
+    - setuptools >=61.0
+    - pip
+  run:
+    - python
+    - docker-py
+    - gitpython
+    - github3.py
+    - python-dotenv
+    - google-cloud-artifact-registry
+
+about:
+  home: https://github.com/cznethub/clonebuildregister
+  license: BSD-3-Clause
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - jnsproul

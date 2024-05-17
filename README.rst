@@ -1,19 +1,19 @@
 
-******
-bimage
-******
+******************
+clonebuildregister
+******************
 
 Clones a repository, builds a docker image from that repository, and then pushes that image to google cloud artifact registry
 
-To use bimage as a package:
+To use clonebuildregister as a package:
 
-    >>> from bimage.bimage import bimage
-    >>> bimage("cbcunc" "timage" "develop" "testimage" "v1" "timage" "testimage" "v1" "us-east1" "bimage-project" "bimage-repository")
+    >>> from clonebuildregister.clonebuildregister import clonebuildregister
+    >>> clonebuildregister("cbcunc", "timage", "develop", "testimage", "v1", "timage", "testimage", "v1", "us-east1", "bimage-project", "bimage-repository")
     >>>
 
-To use bimage as a script:
+To use clonebuildregister as a script:
 
-    usage: bimage [-h] \
+    usage: python -m clonebuildregister [-h] \
                   github_org repo_name branch_or_tag local_image_name local_image_tag path_to_dockerfile target_image_name \
                   target_image_tag region gcloudProjectId repositoryName
     
@@ -39,37 +39,37 @@ To use bimage as a script:
 
         - -h, --help          show this help message and exit
         - --l L, -path_to_local_environment L
-                        The path to a local environment file with secrets not to be seen on github (e.g usr/home/bimage/.env). Defaults to .
+                        The path to a local environment file with secrets not to be seen on github (e.g usr/home/clonebuildregister/.env). Defaults to .
                         (default: None)
         - --r R, -path_to_remote_environment R
-                        The path to the dummy environment files found on github (e.g usr/home/bimage/.env). Defaults to . (default: None)
+                        The path to the dummy environment files found on github (e.g usr/home/clonebuildregister/.env). Defaults to . (default: None)
         - --p P, -platform P    The target platform of the image in the form of os[/arch[/variant]] (default: None)
     
     example:
-        $ python bimage cbcunc timage develop testimage v1 timage testimage v1 us-east1 bimage-project bimage-repository
+        $ python -m clonebuildregister cbcunc timage develop testimage v1 timage testimage v1 us-east1 bimage-project bimage-repository
 
-Use modules of bimage
-*********************
+Use modules of clonebuildregister
+*********************************
 Use the module buildImage:
-    >>> from bimage.buildImage import buildImage
+    >>> from clonebuildregister.buildImage import buildImage
     >>> image = buildImage("testimage:v1","") # if Dockerfile in current directory, use 2nd argument as target directory
     >>>
 Use the module cloneRepo:
-    >>> from bimage.cloneRepo import cloneRepo
+    >>> from clonebuildregister.cloneRepo import cloneRepo
     >>> cloneRepo("cbcunc", "timage", "develop") # github_org, repo_name, branch_or_tag
     >>>
 Use the module cloneRepo with environment variable copy:
-    >>> from bimage.cloneRepo import cloneRepo
+    >>> from clonebuildregister.cloneRepo import cloneRepo
     >>> cloneRepo("cbcunc", "timage", "develop", "path_to_secrets", "path_in_repo_to_env_file") # github_org, repo_name, branch_or_tag
     >>>
 Use the module registerImage:
     >>> # don't forget to authenticate to gcloud within your shell before trying this command
-    >>> from bimage.registerImage import registerImage
+    >>> from clonebuildregister.registerImage import registerImage
     >>> response = registerImage("testimage", "v2", "test-image-out", "v1", "us-east1", "bimage-project", "bimage-repository")
     >>> 
 
-How to configure bimage with gcloud as a developer
-**************************************************
+How to configure clonebuildregister with gcloud as a developer
+**************************************************************
 1. Create an account with Google Cloud at https://cloud.google.com 
 2. Create a new project called bimage-project
 3. Go to the google cloud artifact registry and create a repository called bimage-repository ensure the repository zone is us-east1
@@ -81,12 +81,12 @@ How to configure bimage with gcloud as a developer
 
 Install python dependencies
 ***************************
-1. Navigate to bimage top-level folder
+1. Navigate to clonebuildregister top-level folder
 2. Create a python environment so that your default environment doesn't get cluttered
 3. Run $ conda install --file requirements.txt
 
 Run Tests
 *********
-1. Navigate to bimage top-level folder 
+1. Navigate to clonebuildregister top-level folder 
 2. $ python -m pytest
 3. If it doesn't work, do this. Replace all string instances of bimage-project-###### with the project id that you have been given. TODO: make it simpler so that you don't have to do the previous step.

@@ -1,21 +1,21 @@
 #! /usr/bin/env python
 
 """
-bimage.py, master program that brings all the modules in the bimage package together
+clonebuildregister.py, master program that brings all the modules in the clonebuildregister package together
 """
 
-from bimage.build_image import build_image
-from bimage.clone_repo import clone_repo
-from bimage.register_image import register_image
-from bimage.exceptions import BimageException
+from clonebuildregister.build_image import build_image
+from clonebuildregister.clone_repo import clone_repo
+from clonebuildregister.register_image import register_image
+from clonebuildregister.exceptions import BimageException
 
 
-def bimage(github_org: str, repo_name: str, branch_or_tag: str, local_image_name: str,
+def clonebuildregister(github_org: str, repo_name: str, branch_or_tag: str, local_image_name: str,
            local_image_tag: str, path_to_dockerfile: str, target_image_name: str,
            target_image_tag: str, region: str, gcloud_project_id: str, repository_name: str,
            path_to_local_environment: str = "", path_to_remote_environment: str = "",
            platform: str = "", clone_name: str = ""):
-    """The bimage function, that brings together cloning a repository, building an image, and
+    """The clonebuildregister function, that brings together cloning a repository, building an image, and
     registering that image to the google cloud artifact registry. Given the bash shell
     is authenticated with google cloud before running the program.
 
@@ -40,10 +40,10 @@ def bimage(github_org: str, repo_name: str, branch_or_tag: str, local_image_name
         repositoryName (str): The name of the google cloud artifact registry that
               holds docker images
         path_to_local_environment (str, optional): The path to a local environment
-                file with secrets not to be seen on github (e.g usr/home/bimage/.env).
+                file with secrets not to be seen on github (e.g usr/home/clonebuildregister/.env).
                 Defaults to "".
         path_to_remote_environment (str, optional): The path to the dummy environment
-                files found on github (e.g usr/home/bimage/.env). Defaults to "".
+                files found on github (e.g usr/home/clonebuildregister/.env). Defaults to "".
         platform (str, optional): The target platform of the image in the form of
               os[/arch[/variant]]
         clone_name (str, optional): Essentially the path of the directory to which the cloned repository will

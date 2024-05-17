@@ -7,7 +7,7 @@ The cloneRepo module.
 import github3
 import git
 
-from bimage.exceptions import CloneRepositoryException
+from clonebuildregister.exceptions import CloneRepositoryException
 
 
 def clone_repo(github_org: str, repo_name: str, branch_or_tag: str, clone_name: str=""):

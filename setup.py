@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 """
-Setup script for the bimage package.
+Setup script for the clonebuildregister package.
 """
 
 from setuptools import setup
@@ -19,6 +19,9 @@ def version():
 __version__ = version()
 
 
+
+
+
 def long_description():
     """Construct the long description text."""
 
@@ -29,7 +32,8 @@ def long_description():
     return "\n".join([long_description_1, long_description_2, ])
 
 
-setup(name="bimage",
+
+setup(name="clonebuildregister",
       version=__version__,
       license="BSD3",
       packages=find_packages(exclude=["*.test", "*.test.*", "test.*", "test"]),
@@ -37,8 +41,9 @@ setup(name="bimage",
       author_email="jnsproul@ncsu.edu",
       description="Model package for building container images and posting them to google cloud artifact registry",
       long_description=long_description(),
-      url="https://github.com/cznethub/bimage",
-      download_url="https://github.com/cznethub/bimage/tarball/" + __version__,
+      long_description_content_type="text/x-rst",
+      url="https://github.com/cznethub/clonebuildregister",
+      download_url="https://github.com/cznethub/clonebuildregister/tarball/" + __version__,
       keywords="docker image build",
       classifiers=["Development Status :: 1 - Planning",
                    "License :: OSI Approved :: BSD License",
@@ -46,5 +51,11 @@ setup(name="bimage",
                    "Topic :: Software Development :: Build Tools",
                    ],
       zip_safe=False,
-      test_suite="bimage.test"
+      test_suite="clonebuildregister.test",
+      install_requires=["docker"
+  ,"gitpython"
+  ,"github3.py"
+  ,"python-dotenv"
+  ,"google-cloud-artifact-registry"
+  ,"grpcio-status"]
       )

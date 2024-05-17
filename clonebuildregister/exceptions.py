@@ -77,6 +77,6 @@ class BimageException(Exception):
     """
 
     def __init__(self,
-                 message="Something has gone wrong running bimage, check params"):
+                 message="Something has gone wrong running clonebuildregister, check params"):
         self.message = message
         super().__init__(self.message)

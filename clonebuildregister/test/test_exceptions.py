@@ -4,12 +4,12 @@
 Tests for the bimage module.
 """
 import unittest
-from bimage.clone_repo import clone_repo
-from bimage.build_image import build_image
-from bimage.register_image import register_image
-from bimage.exceptions import CloneRepositoryException
-from bimage.exceptions import BuildImageException
-from bimage.exceptions import TagImageException
+from clonebuildregister.clone_repo import clone_repo
+from clonebuildregister.build_image import build_image
+from clonebuildregister.register_image import register_image
+from clonebuildregister.exceptions import CloneRepositoryException
+from clonebuildregister.exceptions import BuildImageException
+from clonebuildregister.exceptions import TagImageException
 
 
 class TestExceptions(unittest.TestCase):

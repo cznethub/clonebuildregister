@@ -1,5 +1,5 @@
 #! /usr/bin/env python
 
 """
-The bimage package.
+The clonebuildregister package.
 """

@@ -1,12 +1,12 @@
 #! /usr/bin/env python
 
 """
-A __main__ namespace for the bimage package.
+A __main__ namespace for the clonebuildregister package.
 """
 import sys
 import argparse
 
-from bimage.bimage import bimage
+from clonebuildregister.clonebuildregister import clonebuildregister
 
 
 def main(argv):
@@ -14,7 +14,7 @@ def main(argv):
     Build a container image described in a GitHub repository and push that image to google cloud
     artifact registry.
 
-    usage: bimage [-h]
+    usage: python -m clonebuildregister [-h]
                   github_org repo_name branch_or_tag local_image_name local_image_tag
                   path_to_dockerfile target_image_name target_image_tag region
                   gcloudProjectId repositoryName
@@ -43,11 +43,11 @@ def main(argv):
         -h, --help     show help message and exit
 
     example:
-        $ python bimage cbcunc timage develop testimage v1 timage testimage v1\
+        $ python clonebuildregister cbcunc timage develop testimage v1 timage testimage v1\
             us-east1 bimage-project bimage-repository
     """
 
-    parser = argparse.ArgumentParser(prog='bimage',
+    parser = argparse.ArgumentParser(prog='clonebuildregister',
                                      description='Build a container image described in a \
                                         GitHub repository and push that image to google \
                                             cloud artifact registry.',
@@ -83,21 +83,23 @@ def main(argv):
                             docker images")
     parser.add_argument("-l", "--path_to_local_environment",
                         help="The path to a local environment \
-                file with secrets not to be seen on github (e.g usr/home/bimage/.env). \
+                file with secrets not to be seen on github (e.g usr/home/clonebuildregister/.env). \
                 Defaults to "".", default="")
     parser.add_argument("-r", "--path_to_remote_environment",
                         help="The path to the dummy environment \
-                files found on github (e.g usr/home/bimage/.env). Defaults to "".",
+                files found on github (e.g usr/home/clonebuildregister/.env). Defaults to "".",
                 default="")
     parser.add_argument("-p", "--platform", help="The target platform of the image in the \
                          form of os[/arch[/variant]]", default="")
+    parser.add_argument("-cn", "--clone_name", help="The name of the top level folder of the github repository \
+                        will be named after cloning.", default="")
     args = parser.parse_args(argv)
-    bimage(args.github_org, args.repo_name, args.branch_or_tag,
+    clonebuildregister(args.github_org, args.repo_name, args.branch_or_tag,
            args.local_image_name, args.local_image_tag,
            args.path_to_dockerfile, args.target_image_name,
            args.target_image_tag, args.region, args.gcloudProjectId,
            args.repositoryName, args.path_to_local_environment,
-           args.path_to_remote_environment, args.platform)
+           args.path_to_remote_environment, args.platform, args.clone_name)
 
 
 if __name__ == '__main__':
