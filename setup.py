@@ -41,6 +41,7 @@ setup(name="clonebuildregister",
       author_email="jnsproul@ncsu.edu",
       description="Model package for building container images and posting them to google cloud artifact registry",
       long_description=long_description(),
+      long_description_content_type="text/x-rst",
       url="https://github.com/cznethub/clonebuildregister",
       download_url="https://github.com/cznethub/clonebuildregister/tarball/" + __version__,
       keywords="docker image build",
@@ -51,7 +52,7 @@ setup(name="clonebuildregister",
                    ],
       zip_safe=False,
       test_suite="clonebuildregister.test",
-      install_requires=["docker-py"
+      install_requires=["docker"
   ,"gitpython"
   ,"github3.py"
   ,"python-dotenv"

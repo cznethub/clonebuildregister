@@ -14,7 +14,7 @@ def main(argv):
     Build a container image described in a GitHub repository and push that image to google cloud
     artifact registry.
 
-    usage: clonebuildregister [-h]
+    usage: python -m clonebuildregister [-h]
                   github_org repo_name branch_or_tag local_image_name local_image_tag
                   path_to_dockerfile target_image_name target_image_tag region
                   gcloudProjectId repositoryName
