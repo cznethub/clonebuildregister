@@ -6,6 +6,8 @@ This module builds an image via dockerpy
 
 import shutil
 
+from pprint import pprint
+import threading
 import docker
 from dotenv import dotenv_values
 
@@ -42,32 +44,61 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
         env_values = dotenv_values(path_to_local_environment)
     else:
         env_values = dotenv_values(".env")
-    client = docker.from_env()
+    
+    client = docker.APIClient(base_url='unix://var/run/docker.sock') #could be problem statement, could mess up the portability.
+    # events = client.events()
+    # threading.Thread(target=log_events_helper, name="log_events_helper", args=(client,)).start()
+    response = ""
     try:
         if platform:
-            image = client.images.build(
+            response = [line for line in client.build(
                 rm=True,
                 path=f"./{target}/",
                 tag=name,
                 buildargs=dict(env_values),
-                platform=platform
-            )
-        else:
-            print(target)
-            print(name)
+                platform=platform,
+                decode=True
+            )]
             
-            image = client.images.build(
+            pprint(response)
+        else:
+            
+            
+            response = [line for line in client.build(
                 rm=True,
                 path=f"./{str(target)}/",
                 tag=name,
-                buildargs=dict(env_values)
-            )
-        for item in image[1]:
-            for key, value in item.items():
-                if key == 'stream':
-                    text = value.strip()
-                    if text:
-                        print(text)
+                buildargs=dict(env_values),
+                decode=True
+            )]
+            
+            
+            pprint(response)
+        # gets you docker output.
+        # for item in image[1]:
+        #     for key, value in item.items():
+        #         if key == 'stream':
+        #             text = value.strip()
+        #             if text:
+        #                 print(text)
     except Exception as exc:
+        
         raise BuildImageException from exc
-    return image
+    
+    return response
+
+
+
+def log_events_helper(client):
+    """
+    Helper to log events through Docker.
+    @param events the event object that docker py created to help print logs
+    """
+    print("got here")
+    i =0
+    events = client.events()
+    for event in events:
+        i +=1
+        print(i)
+        pprint(event)
+    print("it's ended")
