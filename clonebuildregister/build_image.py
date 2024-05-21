@@ -88,17 +88,17 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
     return response
 
 
-
-def log_events_helper(client):
-    """
-    Helper to log events through Docker.
-    @param events the event object that docker py created to help print logs
-    """
-    print("got here")
-    i =0
-    events = client.events()
-    for event in events:
-        i +=1
-        print(i)
-        pprint(event)
-    print("it's ended")
+# Not used since events don't trigger on failure
+# def log_events_helper(client):
+#     """
+#     Helper to log events through Docker.
+#     @param events the event object that docker py created to help print logs
+#     """
+#     print("got here")
+#     i =0
+#     events = client.events()
+#     for event in events:
+#         i +=1
+#         print(i)
+#         pprint(event)
+#     print("it's ended")

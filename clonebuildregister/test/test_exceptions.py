@@ -18,16 +18,16 @@ class TestExceptions(unittest.TestCase):
     def test_clone_repo_fail(self):
         """This test tries throwing exception on clone_repo 
         """
-        self.assertRaises(Exception, clone_repo, "meow", "this_repo_don'texists", "1232132tttt") # SHould be CloneRepositoryException here instead of generic
+        self.assertRaises(CloneRepositoryException, clone_repo, "meow", "this_repo_don'texists", "1232132tttt") # SHould be CloneRepositoryException here instead of generic
         # try:
         #     clone_repo("meow", "this_repo_don'texists", "1232132tttt")
         # except CloneRepositoryException as exc:
         #     self.assertEqual(exc.message, "Cloning repo has failed. \
         #                      Check arguments pertaining to github repos")
 
-    # def test_build_image_fail(self): TODO: Somehow not working after changing hte client api
+    def test_build_image_fail(self): #TODO: Somehow not working after changing hte client api
     #     """ Test tries building a faulty image"""
-    #     self.assertRaises(Exception, build_image, "meow", ".")
+        self.assertRaises(BuildImageException, build_image, "meow", "/asdfasdf/adsf")
         # try:
         #     build_image("meow", ".")  # there is no dockerfile in this directory
         # except Exception as exc: # BuildImageException instead here
@@ -36,7 +36,7 @@ class TestExceptions(unittest.TestCase):
 
     def test_register_image_fail(self):
         """ Test tries building a faulty image"""
-        self.assertRaises(Exception, register_image, "v12", "rufff12", "v12", "idkwhere", "this_is_notaproject",
+        self.assertRaises(TagImageException, register_image, "ruff12", "v12", "rufff12", "v12", "idkwhere", "this_is_notaproject",
                            "funnynamehere")
         # try:
         #     register_image("meow1111", "v12", "rufff12", "v12", "idkwhere", "this_is_notaproject",
