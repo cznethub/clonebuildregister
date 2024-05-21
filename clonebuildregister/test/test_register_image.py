@@ -10,7 +10,7 @@ import docker
 
 from clonebuildregister import register_image
 from clonebuildregister import build_image
-
+from .testing_variables import GCLOUD_PROJECT, GCLOUD_REPOSITORY, GCLOUD_LOCATION
 
 
 class TestRegisterImage(unittest.TestCase):
@@ -28,13 +28,13 @@ class TestRegisterImage(unittest.TestCase):
 
         client.images.remove("testimage:v2")
         client.images.remove(
-            "us-east1-docker.pkg.dev/bimage-project-423316/bimage-repository/test-image-out:v1"
+            f"{GCLOUD_LOCATION}-docker.pkg.dev/{GCLOUD_PROJECT}/{GCLOUD_REPOSITORY}/test-image-out:v1"
         )
 
     def test_register_image(self):
         """Test register_image.register_image."""
         response = register_image.register_image(
-            "testimage", "v2", "test-image-out", "v1", "us-east1", "bimage-project-423316",
-            "bimage-repository"
+            "testimage", "v2", "test-image-out", "v1", f"{GCLOUD_LOCATION}", f"{GCLOUD_PROJECT}",
+            f"{GCLOUD_REPOSITORY}"
         )
         self.assertFalse("errorDetail" in response)
