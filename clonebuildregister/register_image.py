@@ -15,7 +15,8 @@ from clonebuildregister.exceptions import TagImageException
 
 
 def register_image(local_image_name: str, local_image_tag: str, target_image_name: str,
-                   target_image_tag: str, region: str, gcloud_project_id: str, repository_name: str):
+                   target_image_tag: str, region: str, gcloud_project_id: str, repository_name: str,
+                   delete_all_docker_images: bool = False):
     """
     The registerImage function.
 
@@ -70,5 +71,9 @@ def register_image(local_image_name: str, local_image_tag: str, target_image_nam
     if gcloud_response:
         gcloud_request = artifactregistry_v1.DeleteVersionRequest(name=gcloud_response.version, force=True)
         gcloud_client.delete_version(request=gcloud_request)
-
+    if (delete_all_docker_images):
+        print("Attempting to delete remaining local images. Deleting using --force.")
+        for image in client.images.list():
+            print("Deleting image: ", image.tags)
+            client.images.remove(image.id, force=True)
     return response

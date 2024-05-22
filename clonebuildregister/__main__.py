@@ -39,6 +39,7 @@ def main(argv):
                           google artifact registry
       repositoryName      The name of the google cloud artifact registry that holds docker images
 
+
     options:
         -h, --help     show help message and exit
 
@@ -93,13 +94,20 @@ def main(argv):
                          form of os[/arch[/variant]]", default="")
     parser.add_argument("-cn", "--clone_name", help="The name of the top level folder of the github repository \
                         will be named after cloning.", default="")
+    parser.add_argument("-dr", "--delete_repository", help="Boolean that tells the program to delete the \
+                        github repository that it clones after it registers it to the google cloud AR", default=False)
+    parser.add_argument("-di", "--delete_all_docker_images", help="Boolean that tells the program to delete \
+              all docker images on the local system after the program puts the image on \
+              the google cloud artifact registry. Deletes using force. \
+              Similar to running this $ docker rmi -f $(docker images -aq)", default=False)
     args = parser.parse_args(argv)
     clonebuildregister(args.github_org, args.repo_name, args.branch_or_tag,
            args.local_image_name, args.local_image_tag,
            args.path_to_dockerfile, args.target_image_name,
            args.target_image_tag, args.region, args.gcloudProjectId,
            args.repositoryName, args.path_to_local_environment,
-           args.path_to_remote_environment, args.platform, args.clone_name)
+           args.path_to_remote_environment, args.platform, args.clone_name,
+           args.delete_repository, args.delete_all_docker_images)
 
 
 if __name__ == '__main__':
