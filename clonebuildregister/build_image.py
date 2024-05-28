@@ -48,39 +48,25 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
     client = docker.APIClient(base_url='unix://var/run/docker.sock') #could be problem statement, could mess up the portability.
     # events = client.events()
     # threading.Thread(target=log_events_helper, name="log_events_helper", args=(client,)).start()
-    response = ""
+    response = []
     try:
         if platform:
-            response = [line for line in client.build(
-                rm=True,
-                path=f"./{target}/",
-                tag=name,
-                buildargs=dict(env_values),
-                platform=platform,
-                decode=True
-            )]
+            
+            for line in client.build(rm=True, path=f"./{str(target)}/", tag=name, 
+                                     buildargs=dict(env_values), decode=True, platform=platform):
+                response.append(line)
+                print(line)
             
             pprint(response)
         else:
             
-            
-            response = [line for line in client.build(
-                rm=True,
-                path=f"./{str(target)}/",
-                tag=name,
-                buildargs=dict(env_values),
-                decode=True
-            )]
+            for line in client.build(rm=True, path=f"./{str(target)}/", tag=name, 
+                                     buildargs=dict(env_values), decode=True):
+                response.append(line)
+                print(line)
             
             
-            pprint(response)
-        # gets you docker output.
-        # for item in image[1]:
-        #     for key, value in item.items():
-        #         if key == 'stream':
-        #             text = value.strip()
-        #             if text:
-        #                 print(text)
+            # pprint(response)
     except Exception as exc:
         
         raise BuildImageException from exc
