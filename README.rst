@@ -18,35 +18,42 @@ To use clonebuildregister as a script:
                           github_org repo_name branch_or_tag local_image_name local_image_tag path_to_dockerfile target_image_name target_image_tag region
                           gcloudProjectId repositoryName
 
-Build a container image described in a GitHub repository and push that image to google cloud artifact registry.
 
 positional arguments:
-  github_org            The GitHub organization of the repository
-  repo_name             The name of the repository in the organization
-  branch_or_tag         The branch or tag of the repository
-  local_image_name      The name of the image we create locally from the Dockerfile
-  local_image_tag       The tag of the image we create locally from the Dockerfile (v1, 1.0.1, version2.0)
-  path_to_dockerfile    The path to the docker file from the repository we cloned, usually the name of the repository
-  target_image_name     The target image name, i.e. the name of the image we store in the google cloud artifact registry
-  target_image_tag      The target image tag, i.e. the tag of the image we store in the google cloud artifact registry (v1, 1.0.1, version2.0)
-  region                Region the image will be stored in the google cloud (e.g. us-east1, us, eu)
-  gcloudProjectId       The project id from which the image will be stored under in a google artifact registry
-  repositoryName        The name of the google cloud artifact registry that holds docker images
+  :github_org:            The GitHub organization of the repository
+  :repo_name:             The name of the repository in the organization
+  :branch_or_tag:         The branch or tag of the repository
+  :local_image_name:      The name of the image we create locally from the Dockerfile
+  :local_image_tag:       The tag of the image we create locally from the Dockerfile (v1, 1.0.1, version2.0)
+  :path_to_dockerfile:    The path to the docker file from the repository we cloned, usually the name of the repository
+  :target_image_name:     The target image name, i.e. the name of the image we store in the google cloud artifact registry
+  :target_image_tag:      The target image tag, i.e. the tag of the image we store in the google cloud artifact registry (v1, 1.0.1, version2.0)
+  :region:                Region the image will be stored in the google cloud (e.g. us-east1, us, eu)
+  :gcloudProjectId:       The project id from which the image will be stored under in a google artifact registry
+  :repositoryName:        The name of the google cloud artifact registry that holds docker images
 
 options:
+
   -h, --help            show this help message and exit
+
   -l PATH_TO_LOCAL_ENVIRONMENT, --path_to_local_environment PATH_TO_LOCAL_ENVIRONMENT
                         The path to a local environment file with secrets not to be seen on github (e.g usr/home/clonebuildregister/.env). Defaults to . (default: )
+
   -r PATH_TO_REMOTE_ENVIRONMENT, --path_to_remote_environment PATH_TO_REMOTE_ENVIRONMENT
                         The path to the dummy environment files found on github (e.g usr/home/clonebuildregister/.env). Defaults to . (default: )
+
   -p PLATFORM, --platform PLATFORM
                         The target platform of the image in the form of os[/arch[/variant]] (default: )
+
   -cn CLONE_NAME, --clone_name CLONE_NAME
                         The name of the top level folder of the github repository will be named after cloning. (default: )
+
   -dr DELETE_REPOSITORY, --delete_repository DELETE_REPOSITORY
                         Boolean that tells the program to delete the github repository that it clones after it registers it to the google cloud AR (default: False)
+
   -di DELETE_ALL_DOCKER_IMAGES, --delete_all_docker_images DELETE_ALL_DOCKER_IMAGES
                         Boolean that tells the program to delete all docker images on the local system after the program puts the image on the google cloud artifact registry. Deletes using force. Similar to running this $ docker rmi -f $(docker images -aq) (default: False)
+
     example:
         $ python -m clonebuildregister cbcunc timage develop testimage v1 timage testimage v1 us-east1 bimage-project bimage-repository
 
