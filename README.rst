@@ -46,8 +46,7 @@ options:
   -dr DELETE_REPOSITORY, --delete_repository DELETE_REPOSITORY
                         Boolean that tells the program to delete the github repository that it clones after it registers it to the google cloud AR (default: False)
   -di DELETE_ALL_DOCKER_IMAGES, --delete_all_docker_images DELETE_ALL_DOCKER_IMAGES
-                        Boolean that tells the program to delete all docker images on the local system after the program puts the image on the google cloud artifact
-                        registry. Deletes using force. Similar to running this $ docker rmi -f $(docker images -aq) (default: False)
+                        Boolean that tells the program to delete all docker images on the local system after the program puts the image on the google cloud artifact registry. Deletes using force. Similar to running this $ docker rmi -f $(docker images -aq) (default: False)
     example:
         $ python -m clonebuildregister cbcunc timage develop testimage v1 timage testimage v1 us-east1 bimage-project bimage-repository
 
