@@ -9,7 +9,7 @@ import shutil
 from clonebuildregister.build_image import build_image
 from clonebuildregister.clone_repo import clone_repo
 from clonebuildregister.register_image import register_image
-from clonebuildregister.exceptions import BimageException
+from clonebuildregister.exceptions import CBRException
 
 
 
@@ -83,6 +83,6 @@ def clonebuildregister(github_org: str, repo_name: str, branch_or_tag: str, loca
                    
             elif (delete_repository and not clone_name and os.path.exists(repo_name)):
                   shutil.rmtree(repo_name)
-            raise BimageException from exc
+            raise CBRException from exc
 
     return response

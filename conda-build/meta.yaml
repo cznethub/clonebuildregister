@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/cznethub/clonebuildregister/archive/{{ version }}.tar.gz
-  sha256: 67e8579d95645d720559e35ec8c9ceb09b6ab80aa8ac1eec077a9a21f42c8e23
+  sha256: 5db7b9a2420d00657daed08aaf4cfc27a192b2d68b3b88ff802717561fdc29ba
   path: ../../
   
 

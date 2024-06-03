@@ -19,12 +19,22 @@ class TestBuildImage(unittest.TestCase):
 
         client = docker.from_env()
 
-        client.images.remove("testimage:v1", force=True)
-        client.images.remove("continuumio/miniconda3:latest", force=True)
+        print("Attempting to delete remaining local images. Deleting using --force.")
+        for image in client.images.list():
+            print("Deleting image: ", image.tags)
+            client.images.remove(image.id, force=True)
 
     def test_build_image(self):
         """Test clonebuildregister.clonebuildregister."""
         build_image("testimage:v1", "clonebuildregister/test")
+
+        client = docker.from_env()
+
+        self.assertTrue(len(client.images.list(name="testimage")) > 0)
+
+    def test_build_image_with_platform(self):
+        """Test clonebuildregister.clonebuildregister. with a platform field"""
+        build_image("testimage:v1", "clonebuildregister/test", platform="linux/amd64")
 
         client = docker.from_env()
 

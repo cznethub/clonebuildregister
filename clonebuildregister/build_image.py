@@ -6,8 +6,6 @@ This module builds an image via dockerpy
 
 import shutil
 
-from pprint import pprint
-import threading
 import docker
 from dotenv import dotenv_values
 
@@ -57,7 +55,7 @@ def build_image(name: str, target: str, path_to_local_environment: str = "",
                 response.append(line)
                 print(line)
             
-            pprint(response)
+            # pprint(response)
         else:
             
             for line in client.build(rm=True, path=f"./{str(target)}/", tag=name, 

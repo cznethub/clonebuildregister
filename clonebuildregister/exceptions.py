@@ -69,7 +69,7 @@ class CloneRepositoryException(Exception):
         super().__init__(self.message)
 
 
-class BimageException(Exception):
+class CBRException(Exception):
     """Exception raised for errors when cloning a repo, building an image, and posting it to gcloud
 
     Attributes:
