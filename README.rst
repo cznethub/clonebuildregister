@@ -13,7 +13,7 @@ To use clonebuildregister as a package:
 
 To use clonebuildregister as a script:
 
-    usage: clonebuildregister [-h] [-l PATH_TO_LOCAL_ENVIRONMENT] [-r PATH_TO_REMOTE_ENVIRONMENT] [-p PLATFORM] [-cn CLONE_NAME] [-dr DELETE_REPOSITORY]
+    usage: clonebuildregister [-h] [-v] [-l PATH_TO_LOCAL_ENVIRONMENT] [-r PATH_TO_REMOTE_ENVIRONMENT] [-p PLATFORM] [-cn CLONE_NAME] [-dr DELETE_REPOSITORY]
                           [-di DELETE_ALL_DOCKER_IMAGES]
                           github_org repo_name branch_or_tag local_image_name local_image_tag path_to_dockerfile target_image_name target_image_tag region
                           gcloudProjectId repositoryName
@@ -35,6 +35,8 @@ positional arguments:
 options:
 
   -h, --help            show this help message and exit
+
+  -v, --version         show program's version number and exit
 
   -l PATH_TO_LOCAL_ENVIRONMENT, --path_to_local_environment PATH_TO_LOCAL_ENVIRONMENT
                         The path to a local environment file with secrets not to be seen on github (e.g usr/home/clonebuildregister/.env). Defaults to . (default: )
@@ -92,7 +94,7 @@ Install Python dependencies
 ***************************
 1. Navigate to clonebuildregister top-level folder
 2. Create a python environment so that your default environment doesn't get cluttered
-3. Run $ conda install --file environment.yml
+3. Install dependencies using $ pip install . (doesn't include pytest or tox, see "Run Tests section for that")
 4. Ensure you have Docker installed.
 
 Run Tests
@@ -100,4 +102,10 @@ Run Tests
 1. Navigate to clonebuildregister top-level folder
 2. Ensure you have google cloud, docker, and the required dependencies.
 3. Make sure clonebuildregister/test/testing_variables.py has the correct values for the setup you have.
-4. Run $ python -m pytest
+4. $ pip install -e '.[dev]'
+5. Run $ pytest to run test in local environment
+6. Run $ tox to run test for python environments 3.8, 3.9. 3.10, 3.11, and 3.12. Along with linting, type checking, and style checking
+7. Run $ tox -e style to just do style checking
+8. $ tox -e lint for just linting.
+9. $ tox -e type for just type checking
+

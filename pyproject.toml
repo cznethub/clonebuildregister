@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clonebuildregister"
+dynamic = ["version", "readme"]
+authors = [
+  { name="Jude Sproul", email="judesproul@gmail.com" },
+  { name="Chris Calloway", email="cbc@unc.edu"}
+]
+license = {file = "LICENSE"}
+description = "A package to clone a Git repository, build it's image using Docker, and then register it to the Google Artifact Registry."
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12"
+]
+dependencies = ["docker"
+  ,"gitpython"
+  ,"github3.py"
+  ,"python-dotenv"
+  ,"google-cloud-artifact-registry"
+  ,"grpcio-status"]
+keywords = ["docker", "google cloud", "artifact registry", "build", "clone", "git", "register", "upload", "image"]
+
+[project.optional-dependencies]
+dev = [
+    "tox",
+    "pytest"
+]
+
+[project.urls]
+Homepage = "https://github.com/cznethub/clonebuildregister"
+Issues = "https://github.com/cznethub/clonebuildregister/issues"
+
+[tool.setuptools.dynamic]
+version = {file = ["VERSION.txt"]}
+readme = {file = ["README.rst"]}
+
+
+[project.scripts]
+clonebuildregister = "clonebuildregister.__main__:main"
