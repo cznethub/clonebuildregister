@@ -43,6 +43,7 @@ def main(argv=sys.argv):
 
     options:
         -h, --help     show help message and exit
+        -v, --version  show version message and exit
 
     example:
         $ python clonebuildregister cbcunc timage develop testimage v1 timage testimage v1\
