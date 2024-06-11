@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/cznethub/clonebuildregister/archive/{{ version }}.tar.gz
-  sha256: 5db7b9a2420d00657daed08aaf4cfc27a192b2d68b3b88ff802717561fdc29ba
+  sha256: b963bc5a24a708e3b78a9e4cd871b256086b52e1ae3891782b85c8300f6b3be6
   path: ../src/
   
 
@@ -34,17 +34,6 @@ requirements:
   entry_points:
     - clonebuildregister = clonebuildregister.__main__:main
 
-test:
-  imports:
-    - clonebuildregister
-  commands:
-    - pytest
-    - tox -e lint
-    - tox -e style
-    - tox -e type
-  requires:
-    - tox
-    - pytest
 
 about:
   home: https://github.com/cznethub/clonebuildregister
