@@ -10,7 +10,7 @@ from ._version import __version__
 from .clonebuildregister import clonebuildregister
 
 
-def main(argv=sys.argv):
+def main():
     """
     Build a container image described in a GitHub repository and push that image to google cloud
     artifact registry.
@@ -150,7 +150,7 @@ def main(argv=sys.argv):
               Similar to running this $ docker rmi -f $(docker images -aq)",
         default=False,
     )
-    args = parser.parse_args(argv)
+    args = parser.parse_args()
     clonebuildregister(
         args.github_org,
         args.repo_name,
@@ -173,4 +173,4 @@ def main(argv=sys.argv):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main()
