@@ -1,14 +1,12 @@
 {% set name = "clonebuildregister" %}
-{% set version = "0.0.5" %}
 
 package:
   name: {{ name|lower }}
-  version: {{ version }}
+  version: {{ GIT_DESCRIBE_TAG }}
 
 source:
-  url: https://github.com/cznethub/clonebuildregister/archive/{{ version }}.tar.gz
-  sha256: b963bc5a24a708e3b78a9e4cd871b256086b52e1ae3891782b85c8300f6b3be6
-  path: ../src/
+  git-url: https://github.com/cznethub/clonebuildregister
+  path: ../
   
 
 build:
@@ -32,7 +30,7 @@ requirements:
     - google-cloud-artifact-registry
     - grpcio-status
   entry_points:
-    - clonebuildregister = clonebuildregister.__main__:main
+    - clonebuildregister = src.clonebuildregister.__main__:main
 
 
 about:
@@ -43,3 +41,9 @@ about:
 extra:
   recipe-maintainers:
     - jnsproul
+
+outputs:
+  - name: clonebuildregister
+    files:
+      exclude:
+        - tests/*

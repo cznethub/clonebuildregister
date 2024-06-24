@@ -5,10 +5,10 @@ A __main__ namespace for the clonebuildregister package.
 """
 import sys
 import argparse
+from importlib.metadata import version, PackageNotFoundError
 
-from ._version import __version__
 from .clonebuildregister import clonebuildregister
-
+from ._version import __version__
 
 def main():
     """

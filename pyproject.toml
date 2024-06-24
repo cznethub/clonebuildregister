@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools >= 61.0"]
+requires = ["setuptools >= 61.0", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -41,9 +41,14 @@ Homepage = "https://github.com/cznethub/clonebuildregister"
 Issues = "https://github.com/cznethub/clonebuildregister/issues"
 
 [tool.setuptools.dynamic]
-version = {file = ["VERSION.txt"]}
 readme = {file = ["README.rst"]}
 
+[tool.setuptools_scm]
+version_scheme = "only-version"
+local_scheme = "no-local-version"
 
 [project.scripts]
-clonebuildregister = "clonebuildregister.__main__:main"
+clonebuildregister = "src.clonebuildregister.__main__:main"
+
+[tool.setuptools.packages.find]
+exclude = ["tests/*"]
