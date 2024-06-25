@@ -48,7 +48,8 @@ version_scheme = "only-version"
 local_scheme = "no-local-version"
 
 [project.scripts]
-clonebuildregister = "src.clonebuildregister.__main__:main"
+clonebuildregister = "clonebuildregister.__main__:main"
 
 [tool.setuptools.packages.find]
-exclude = ["tests/*"]
+exclude = ["tests/*", key.json]
+where = ["src"]

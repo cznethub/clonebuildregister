@@ -1,28 +1,25 @@
 {% set name = "clonebuildregister" %}
+{% set version = "0.0.7" %}
 
 package:
   name: {{ name|lower }}
-  version: {{ GIT_DESCRIBE_TAG }}
+  version: {{ version }}
 
 source:
-  git-url: https://github.com/cznethub/clonebuildregister
-  path: ../
-  
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/clonebuildregister-{{ version }}.tar.gz
+  sha256: 0a1327238012cec1be605374d4be4952e837fcc72912f526588fd73c30a1c3c3
 
 build:
   noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script: {{ PYTHON }} -m pip install . -vv
   number: 0
 
 requirements:
-  build:
-    - python
-    - setuptools
   host:
-    - python
+    - python >=3.8
     - pip
   run:
-    - python
+    - python >=3.8
     - docker-py
     - gitpython
     - github3.py
@@ -32,18 +29,13 @@ requirements:
   entry_points:
     - clonebuildregister = src.clonebuildregister.__main__:main
 
-
 about:
-  home: https://github.com/cznethub/clonebuildregister
+  home: https://pypi.org/project/clonebuildregister/
+  summary: A package to clone a Git repository, build it's image using Docker, and then register it to the Google Artifact Registry.
   license: BSD-3-Clause
   license_file: LICENSE
 
 extra:
   recipe-maintainers:
     - jnsproul
-
-outputs:
-  - name: clonebuildregister
-    files:
-      exclude:
-        - tests/*
+    - cbc
