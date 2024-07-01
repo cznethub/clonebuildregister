@@ -51,5 +51,10 @@ local_scheme = "no-local-version"
 clonebuildregister = "clonebuildregister.__main__:main"
 
 [tool.setuptools.packages.find]
-exclude = ["tests/*", key.json]
+exclude = ["tests/*", "key.json"]
 where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "src"
+]

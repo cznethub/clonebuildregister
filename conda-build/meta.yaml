@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/clonebuildregister-{{ version }}.tar.gz
-  sha256: 0a1327238012cec1be605374d4be4952e837fcc72912f526588fd73c30a1c3c3
+  sha256: 2d61e0995fa33dcf02b5001bc6d2d42c43e5a1ff5ddfadcf4d4e2bd57f292724
 
 build:
   noarch: python
