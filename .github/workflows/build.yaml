@@ -25,5 +25,5 @@ jobs:
       run: |
         gcloud auth configure-docker us-east1-docker.pkg.dev
         docker build -t us-east1-docker.pkg.dev/clone-build-registry/clone-build-registry/nginx:latest .
-        docker push -t us-east1-docker.pkg.dev/clone-build-registry/clone-build-registry/nginx:latest
+        docker push us-east1-docker.pkg.dev/clone-build-registry/clone-build-registry/nginx:latest
         
