@@ -27,3 +27,20 @@ jobs:
         docker build -t us-east1-docker.pkg.dev/clone-build-registry/clone-build-registry/nginx:latest .
         docker push us-east1-docker.pkg.dev/clone-build-registry/clone-build-registry/nginx:latest
         
+    - name: get branch name
+      shell: bash
+      run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      id: extract_branch
+
+
+    - name: install dependencies
+      run: 
+        pip install -e '.[dev]'
+
+    - name: run pytest
+      run:
+        pytest
+
+
+
+    
