@@ -32,6 +32,10 @@ jobs:
       run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
       id: extract_branch
 
+    - name: install python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12.3'
 
     - name: install dependencies
       run: 
