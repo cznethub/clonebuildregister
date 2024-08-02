@@ -4,7 +4,7 @@ clonebuildregister
 ******************
 
 Clones a repository, builds a docker image from that repository, and then pushes that image to google cloud artifact registry
-
+ 
 To use clonebuildregister as a package:
 
     >>> from clonebuildregister.clonebuildregister import clonebuildregister
