@@ -1,45 +1,39 @@
 name: github actions
 
 on:
-  push:
-    branches:
-    - 'gitactions'
+    push:
+        branches:
+            - "gitactions"
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - name: code checkout
-      uses: actions/checkout@v2
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: code checkout
+              uses: actions/checkout@v2
 
-    - name: install the gcloud cli
-      uses: google-github-actions/setup-gcloud@v0
-      with:
-        project_id: ${{ secrets.GOOGLE_PROJECT }}
-        service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-        export_default_credentials: true
+            - name: install the gcloud cli
+              uses: google-github-actions/setup-gcloud@v0
+              with:
+                  project_id: ${{ secrets.GOOGLE_PROJECT }}
+                  service_account_key: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+                  export_default_credentials: true
 
-    - name: build and push the docker image
-      env:
-        GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
-      run: |
-        gcloud auth configure-docker us-east1-docker.pkg.dev
-        docker build -t us-east1-docker.pkg.dev/clone-build-registry/clone-build-registry/nginx:latest .
-        docker push us-east1-docker.pkg.dev/clone-build-registry/clone-build-registry/nginx:latest
-        
-    - name: install python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.12.3'
+            - name: build and push the docker image
+              env:
+                  GOOGLE_PROJECT: ${{ secrets.GOOGLE_PROJECT }}
+              run: |
+                  gcloud auth configure-docker us-east1-docker.pkg.dev
+                  docker build -t us-east1-docker.pkg.dev/${{ secrets.GOOGLE_PROJECT }}/cbr-testing/nginx:latest .
+                  docker push us-east1-docker.pkg.dev/${{ secrets.GOOGLE_PROJECT }}/cbr-testing/nginx:latest
 
-    - name: install dependencies
-      run: 
-        pip install -e '.[dev]'
+            - name: install python
+              uses: actions/setup-python@v2
+              with:
+                  python-version: "3.12.3"
 
-    - name: run pytest
-      run:
-        pytest
+            - name: install dependencies
+              run: pip install -e '.[dev]'
 
-
-
-    
+            - name: run pytest
+              run: pytest
