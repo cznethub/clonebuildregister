@@ -4,7 +4,7 @@
     to google cloud.
 """
 
-GCLOUD_PROJECT = "cznethub"
+GCLOUD_PROJECT = "cznet-393818"
 GCLOUD_REPOSITORY = "cbr-testing"
 
 GCLOUD_LOCATION = "us-east1"
