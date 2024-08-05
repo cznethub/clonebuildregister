@@ -4,8 +4,8 @@
     to google cloud.
 """
 
-GCLOUD_PROJECT = "clone-build-registry"
-GCLOUD_REPOSITORY = "clone-build-registry"
+GCLOUD_PROJECT = "cznethub"
+GCLOUD_REPOSITORY = "cbr-testing"
 
 GCLOUD_LOCATION = "us-east1"
 
