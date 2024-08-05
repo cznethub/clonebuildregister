@@ -4,8 +4,8 @@
     to google cloud.
 """
 
-GCLOUD_PROJECT = "bimage-project-423316"
-GCLOUD_REPOSITORY = "bimage-repository"
+GCLOUD_PROJECT = "cznet-393818"
+GCLOUD_REPOSITORY = "cbr-testing"
 
 GCLOUD_LOCATION = "us-east1"
 
