@@ -120,11 +120,55 @@ Run Tests
 
 Building the Project and Uploading to PyPI
 ==========================================
-Email jnsproul@ncsu.edu for more information about making a release.
+Email jnsproul@ncsu.edu for more info.
 
+Here is info for upload to PyPI
 
-How to Use Grayskull for Your Project
--------------------------------------
+1. Prerequisites
+-----------------
+
+Ensure you have the following installed:
+
+- Python 3.6+
+- ``build`` and ``twine`` Python packages:
+
+.. code-block:: bash
+
+   pip install build twine
+
+2. Building the Project
+------------------------
+
+The ``pyproject.toml`` indicates this project uses the modern build system. Run the following command to build the project:
+
+.. code-block:: bash
+
+   python -m build
+
+This will:
+
+- Create a ``dist/`` directory containing the **source distribution** (``.tar.gz``) and **wheel** (``.whl``) files.
+
+3. Uploading to PyPI
+---------------------
+
+1. **Register an account on** `PyPI <https://pypi.org/>`_ **(if you don’t have one).**
+2. **Upload the package**:
+
+   .. code-block:: bash
+
+      python -m twine upload dist/*
+
+   You will be prompted for your PyPI username and password (or you can use an API token). Need access to PyPI repository as contributor.
+
+3. **Confirm Upload**: Check your package at:
+
+   .. code-block::
+
+      https://pypi.org/project/<your-package-name>/
+
+How to Use Grayskull to upload to Anaconda from PyPI
+----------------------------------------------------
 
 Install Grayskull:
 
@@ -134,7 +178,7 @@ Install Grayskull:
 
 Generate a Conda Recipe:
 
-Run the following command, replacing ``clonebuildregister`` with your PyPI package's name:
+Run the following command, replacing ``clonebuildregister`` with the PyPI package's name:
 
 .. code-block:: bash
 
@@ -162,11 +206,13 @@ Use ``conda-build`` to build the package:
 
 Upload to Anaconda:
 
-After the build is complete, upload the package:
+You may need to run sha256sum on your .tar.gz file and include it in the meta.yaml to upload.
+
+After the build is complete, upload the package to CUAHSI org:
 
 .. code-block:: bash
 
-   anaconda upload /path/to/conda-bld/noarch/clonebuildregister-<version>-<build>.tar.bz2
+   anaconda upload --user cuahsi /path/to/conda-bld/noarch/clonebuildregister-<version>-<build>.tar.bz2
 
 Verify Installation:
 
@@ -174,4 +220,4 @@ Test the installation from your Conda channel:
 
 .. code-block:: bash
 
-   conda install -c <your-anaconda-username> clonebuildregister
+   conda install -c CUAHSI clonebuildregister
