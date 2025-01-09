@@ -86,7 +86,7 @@ Use the module ``registerImage``:
    response = registerImage("testimage", "v2", "test-image-out", "v1", "us-east1", "bimage-project", "bimage-repository")
 
 How to configure clonebuildregister with gcloud as a developer
-===============================================================
+==============================================================
 
 1. Create an account with Google Cloud at https://cloud.google.com
 2. Create a new project called bimage-project.
@@ -118,3 +118,60 @@ Run Tests
 8. ``tox -e lint`` for just linting.
 9. ``tox -e type`` for just type checking.
 
+Building the Project and Uploading to PyPI
+==========================================
+Email jnsproul@ncsu.edu for more information about making a release.
+
+
+How to Use Grayskull for Your Project
+-------------------------------------
+
+Install Grayskull:
+
+.. code-block:: bash
+
+   pip install grayskull
+
+Generate a Conda Recipe:
+
+Run the following command, replacing ``clonebuildregister`` with your PyPI package's name:
+
+.. code-block:: bash
+
+   grayskull pypi clonebuildregister
+
+This will create a ``meta.yaml`` file in a directory named ``clonebuildregister``.
+
+Check and Modify the Recipe (if necessary):
+
+Navigate to the generated folder:
+
+.. code-block:: bash
+
+   cd clonebuildregister
+
+Open ``meta.yaml`` and ensure all dependencies, license information, and metadata are accurate.
+
+Build the Conda Package:
+
+Use ``conda-build`` to build the package:
+
+.. code-block:: bash
+
+   conda build .
+
+Upload to Anaconda:
+
+After the build is complete, upload the package:
+
+.. code-block:: bash
+
+   anaconda upload /path/to/conda-bld/noarch/clonebuildregister-<version>-<build>.tar.bz2
+
+Verify Installation:
+
+Test the installation from your Conda channel:
+
+.. code-block:: bash
+
+   conda install -c <your-anaconda-username> clonebuildregister
